@@ -1,22 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset = "UTF-8">
     <title>EETAC WARS</title>
-    <link rel ="stylesheet" href ="/css/style.css">
-    <link rel ="stylesheet" type="text/css" href ="/css/fuentes.css"/>
+    <link rel ="stylesheet" href ="../css/style.css">
+    <link rel ="stylesheet" type="text/css" href ="../css/fuentes.css"/>
     <script src="https://kit.fontawesome.com/fbbddd9141.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/login.js"></script>
 </head>
-<body>
+<div>
 
     <header>
 
        <div class ="contenedor"></div>
-        <a href="/index.html"><img src="/resources/logoo.png" alt="EETAC WARS" class="logotipo"></a>
+        <a href="../index.html"><img src="../resources/logoo.png" alt="EETAC WARS" class="logotipo"></a>
 
         <nav class="nav">
             <ul class="ul">
-                <li><a href="/index.html" >INICIO</a></li>
+                <li><a href="../index.html" >INICIO</a></li>
                 <li><a href="descubrir.html">DESCUBRIR</a></li>
                 <li><a href="tienda.html">TIENDA</a></li>
                 <li><a href="login.html"class="activo">LOG IN</a></li>
@@ -33,15 +35,31 @@
     </header>
 
 
-        <section class="page-container">
-            <h1>Login</h1>
-            <form action="" method="post">
-                <input type="text" name="username" class="username" placeholder="Username">
+
+        <section>
+
+
+                <form action="" method="post">
+                    <h1>Login</h1>
+                    <input type="text" name="username" class="username" placeholder="Username">
+                    <input type="password" name="password" class="password" placeholder="Password">
+                    <button type="submit"><a href="../index.html">Send</a></button>
+                    <div class="error"><span>+</span></div>
+                </form>
+
+
+                <form action="" method="post" class="formulario__register">
+                 <h1>REGISTRO</h1>
+                 <input type="text" name="username" class="username" placeholder="Username">
+                 <input type="password" name="password" class="password" placeholder="Password">
                 <input type="password" name="password" class="password" placeholder="Password">
-                <button type="submit"><a href="/index.html">Send</a></button>
+                <button type="submit"><a href="/html/login.html">REGISTRARSE</a></button>
                 <div class="error"><span>+</span></div>
-            </form>
-        </section>
+                </form>
+
+            </section>
+
+         </div>
 
         <!-- Javascript -->
         <script src="assets/js/jquery-1.8.2.min.js"></script>
