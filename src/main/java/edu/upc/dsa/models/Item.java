@@ -13,6 +13,7 @@ public class Item {
     String total;
     //el atributo value viene conectado a través del nivel del jugador
     String value;
+    String image;
     //id del jugador que tiene estos items
     String idPlayer;
 
@@ -31,6 +32,18 @@ public class Item {
         this.name = name;
         this.total = total;
     }
+
+    //constructor completo
+    public Item(String name, String level, String type, String total, String value, String image, List<User> itemsByUser) {
+        this.name = name;
+        this.level = level;
+        this.type = type;
+        this.total = total;
+        this.value = value;
+        this.image = image;
+        this.itemsByUser = itemsByUser;
+    }
+
 
     public String getId() {
         return id;

@@ -33,11 +33,11 @@ public class AuthenticationService {
         this.gservice = GameManagerImpl.getInstance();
 
         if (gservice.numUsers() == 0) {
-            this.gservice.addUser("Tatiana", "hola");
-            this.gservice.addUser("Gabriel", "buenas");
-            this.gservice.addUser("Kevin", "bye");
-            this.gservice.addUser("Oscar", "hello");
-            this.gservice.addUser("Miquel", "adios");
+            this.gservice.addUser("Tatiana", "hola", "tatiana@hotmail.es", "Tatiana", "Tkachuk", "Barcelona");
+            this.gservice.addUser("Gabriel", "buenas", "gabriel@hotmail.es", "Gabriel", "Donate", "Barcelona");
+            this.gservice.addUser("Kevin", "bye", "kevin@hotmail.es", "Kevin", "Alcalde", "Barcelona");
+            this.gservice.addUser("Oscar", "hello", "oscar@hotmail.es", "Oscar", "Vilamitjana", "Barcelona");
+            this.gservice.addUser("Miquel", "adios", "miquel@hotmail.es", "Miquel", "Arina", "Barcelona");
         }
     }
 

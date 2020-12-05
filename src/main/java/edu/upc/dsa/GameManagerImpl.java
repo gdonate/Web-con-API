@@ -89,11 +89,11 @@ public class GameManagerImpl implements GameManager {
     //funcion que implementa el contrato UserManager
     //función añadir usuario
     //Add a new User
-    public User addUser(String username, String password) throws ExistantUserException{
+    public User addUser(String username, String password, String mail, String name, String lastname, String city) throws ExistantUserException{
         //por si hubiese mismo id cosa poco probable
         User user = this.users.get(username);
         if(user!=null) throw new ExistantUserException();
-        user = new User(username,password);
+        user = new User(username, password, mail, name, lastname, city);
         this.users.put(username, user);
         logger.info("Nuevo usuario en el sistema: "+user.toString());
         return user;
@@ -105,6 +105,15 @@ public class GameManagerImpl implements GameManager {
         if(!password.equals(user.getPassword())) throw new PasswordNotMatchException();
         logger.info("Usuario logeado: "+user.toString());
         return user;
+    }
+
+    //añadir una imagen al usuario
+    public void addImage(String username, String password, String image) throws UserNotFoundException, PasswordNotMatchException{
+        User user= this.users.get(username);
+        if(user==null) throw new UserNotFoundException();
+        if(!password.equals(user.getPassword())) throw new PasswordNotMatchException();
+        user.setImage(image);
+        logger.info("Usuario con la imagen añadida: " +user.toString());
     }
 
     //a continuación a implementar todas las funciones creadas
@@ -265,6 +274,10 @@ public class GameManagerImpl implements GameManager {
 
             user.setUsername(u.getUsername());
             user.setPassword(u.getPassword());
+            user.setMail(u.getMail());
+            user.setName(u.getName());
+            user.setLastname(u.getLastname());
+            user.setCity(u.getCity());
 
             logger.info(user+" actualizado");
         }

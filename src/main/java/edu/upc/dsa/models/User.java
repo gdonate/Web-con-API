@@ -18,6 +18,7 @@ public class User {
     String lastname;
     String city;
     String password;
+    String image;
 
     //atributos originalmente para jugador pero finalmente para usuario
     //de momento solo añadimos estos dos, se pueden añadir mucho más depende la complejidad del juego
@@ -41,6 +42,19 @@ public class User {
     }
 
     //constructor a parte para añadir usuarios con lo básico
+    public User(String username, String password, String mail, String name, String lastname, String city) {
+        //nuevo constructor
+        this.username = username;
+        this.password=password;
+        this.mail = mail;
+        this.name=name;
+        this.lastname=lastname;
+        this.city=city;
+        this.playsByPlayer = new ArrayList<>();
+        this.itemsByPlayer = new ArrayList<>();
+    }
+
+    //constructor para register básico y más simple
     public User(String username, String password) {
         //this.id = id;
         this.username = username;
@@ -48,6 +62,7 @@ public class User {
         this.playsByPlayer = new ArrayList<>();
         this.itemsByPlayer = new ArrayList<>();
     }
+
 
     //ahora pondremos los getters y setters
     public String getId() {
@@ -122,6 +137,14 @@ public class User {
         this.level = level;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     //a continuación pondremos el tostring por si hace falta mostrarlo por consola
 
 
@@ -129,7 +152,14 @@ public class User {
     public String toString() {
         return "User{" +
                 "username='" + username + '\'' +
+                ", mail='" + mail + '\'' +
+                ", name='" + name + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", city='" + city + '\'' +
                 ", password='" + password + '\'' +
+                ", image='" + image + '\'' +
+                ", life='" + life + '\'' +
+                ", level='" + level + '\'' +
                 '}';
     }
 }

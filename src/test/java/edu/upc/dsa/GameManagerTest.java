@@ -27,10 +27,10 @@ public class GameManagerTest {
         this.gtest=GameManagerImpl.getInstance();
 
         log.info("Agregamos los 4 primeros usuarios al sistema antes de iniciar el juego");
-        this.gtest.addUser("Pepe", "hola");
-        this.gtest.addUser("Marcos","adios");
-        this.gtest.addUser("Alicia","buenas");
-        this.gtest.addUser("Elena","bye");
+        this.gtest.addUser("pepe15", "hola","pepe@hotmail.es", "Pepe", "Hernández", "Paris");
+        this.gtest.addUser("marcosz45", "bye","marcos45@hotmail.es", "Marcos", "Pérez", "Madrid");
+        this.gtest.addUser("raul32", "hello","raul32@hotmail.es", "Raúl", "Rodríguez", "San Sebastián");
+        this.gtest.addUser("helenapr", "adios","helenapr@hotmail.es", "Helena", "Mata", "León");
 
         //nos faltan añadir más parámetros antes de que empiece el juego
 
@@ -41,7 +41,7 @@ public class GameManagerTest {
     public void testAddUser() throws ExistantUserException {
         try {
             log.info("Añadimos otro más para comprobar la función testAddUser");
-            this.gtest.addUser("Blanca", "otra");
+            this.gtest.addUser("blancas", "otra", "blanca@hotmail.es", "Blanca", "Sanchez", "Barcelona");
             Assert.assertEquals(5, this.gtest.numUsers());
         }
 
@@ -67,8 +67,8 @@ public class GameManagerTest {
     @Test
     public void testGetUserLogin() throws UserNotFoundException, PasswordNotMatchException {
         try {
-            User user = this.gtest.getUserLogin("Elena", "bye");
-            Assert.assertEquals("Elena", user.getUsername());
+            User user = this.gtest.getUserLogin("helenapr", "adios");
+            Assert.assertEquals("helenapr", user.getUsername());
         }
         catch (NullPointerException e){
             log.info("NullPointerException caught");
@@ -78,8 +78,8 @@ public class GameManagerTest {
     @Test
     public void testGetUser() throws UserNotFoundException {
         try {
-            User user = this.gtest.getUser("Elena");
-            Assert.assertEquals("Elena", user.getUsername());
+            User user = this.gtest.getUser("helenapr");
+            Assert.assertEquals("helenapr", user.getUsername());
         }
         catch (NullPointerException e){
             log.info("NullPointerException caught");
@@ -90,7 +90,7 @@ public class GameManagerTest {
     @Test(expected = UserNotFoundException.class)
     public void testGetUserLoginNotFound() throws Exception {
         try {
-            User user = this.gtest.getUserLogin("Andres", "andres");
+            User user = this.gtest.getUserLogin("andrespr", "andres");
         }
         catch (NullPointerException e){
             log.info("NullPointerException caught");
@@ -100,7 +100,7 @@ public class GameManagerTest {
     @Test(expected = PasswordNotMatchException.class)
     public void testGetUserPasswordNotMatch() throws Exception {
         try {
-            User user = this.gtest.getUserLogin("Alicia", "buenasss");
+            User user = this.gtest.getUserLogin("helenapr", "hola");
         }
         catch(NullPointerException e){
             log.info("NullPointerException caught");
@@ -110,7 +110,7 @@ public class GameManagerTest {
     @Test(expected = ExistantUserException.class)
     public void testAddExistingUser() throws Exception {
         try {
-            User user = this.gtest.addUser("Alicia", "buenas");
+            User user = this.gtest.addUser("raul32", "heelloos", "raulloquesea", "Raúl", "Horta", "Barcelona");
         }
         catch (NullPointerException e){
             log.info("NullPointerException caught");

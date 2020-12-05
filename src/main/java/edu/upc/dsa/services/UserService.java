@@ -3,6 +3,7 @@ package edu.upc.dsa.services;
 import edu.upc.dsa.GameManager;
 import edu.upc.dsa.GameManagerImpl;
 import edu.upc.dsa.models.ExistantUserException;
+import edu.upc.dsa.models.PasswordNotMatchException;
 import edu.upc.dsa.models.User;
 import edu.upc.dsa.models.UserNotFoundException;
 import io.swagger.annotations.Api;
@@ -31,11 +32,19 @@ public class UserService {
     public UserService() throws Exception {
         this.gservice = GameManagerImpl.getInstance();
         if (gservice.numUsers() == 0) {
-            this.gservice.addUser("Tatiana", "hola");
-            this.gservice.addUser("Gabriel", "buenas");
-            this.gservice.addUser("Kevin", "bye");
-            this.gservice.addUser("Oscar", "hello");
-            this.gservice.addUser("Miquel", "adios");
+            this.gservice.addUser("Tatiana", "hola", "tatiana@hotmail.es", "Tatiana", "Tkachuk", "Barcelona");
+            this.gservice.addUser("Gabriel", "buenas", "gabriel@hotmail.es", "Gabriel", "Donate", "Barcelona");
+            this.gservice.addUser("Kevin", "bye", "kevin@hotmail.es", "Kevin", "Alcalde", "Barcelona");
+            this.gservice.addUser("Oscar", "hello", "oscar@hotmail.es", "Oscar", "Vilamitjana", "Barcelona");
+            this.gservice.addUser("Miquel", "adios", "miquel@hotmail.es", "Miquel", "Arina", "Barcelona");
+
+            //añadir algunas imagenes a los usuarios
+            this.gservice.addImage("Tatiana", "hola", "/resources/users/tatiana.jpg");
+            this.gservice.addImage("Gabriel", "buenas", "/resources/users/gabriel.png");
+            this.gservice.addImage("Kevin", "bye", "/resources/users/kevin.png");
+            this.gservice.addImage("Oscar", "hello", "/resources/users/oscar.jpg");
+            this.gservice.addImage("Miquel", "adios", "/resources/users/mikel.png");
+
         }
     }
 
@@ -66,10 +75,35 @@ public class UserService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addUser(User user) {
         try {
-            this.gservice.addUser(user.getUsername(), user.getPassword());
+            this.gservice.addUser(user.getUsername(), user.getPassword(), user.getMail(), user.getName(), user.getLastname(), user.getCity());
             return Response.status(201).build();
         }
         catch (ExistantUserException e){
+            return Response.status(500).build();
+        }
+    }
+
+    //añadir imagen al usuario
+    @POST
+    @ApiOperation(value = "añadir imagen usuario", notes = "escribir el nombre de usuario y la contraseña para poner imagen")
+    @ApiResponses(value = {
+            @ApiResponse(code= 201, message = "Succesful", response= User.class, responseContainer="List"),
+            @ApiResponse(code= 404, message = "User not found", responseContainer="List"),
+            @ApiResponse(code=500, message="Password not match", responseContainer = "List")
+    })
+
+    //parece que el login nos da buenos resultados
+    @Path("/addImage")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addImage(User user){
+        try{
+            this.gservice.addImage(user.getUsername(), user.getPassword(), user.getImage());
+            return Response.status(201).build();
+        } catch (UserNotFoundException e1){
+            e1.printStackTrace();
+            return Response.status(404).build();
+        } catch(PasswordNotMatchException e2){
+            e2.printStackTrace();
             return Response.status(500).build();
         }
     }
