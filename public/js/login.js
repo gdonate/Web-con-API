@@ -1,42 +1,40 @@
-//Global uri
-var BASE_URI = "localhost:8080/dsaApp/";
+//de momento lo ponemos como localhost después se cambiará a http://147.83.7.206:8080/dsaApp
+var BASE_URI="http://localhost:8080/dsaApp";
 
-//Calls when the document is ready
+//solo cuando esté preparado documento html
 $(document).ready(function(){
+    //aqui pondremos todas las variables que se necesitan para inciar sesión usuario en la API
+    var $username = $('#username');
+	console.log(username);
+	var $password = $('#password');
+	console.log(password);
     //Code if the user clicks log in button
     $("#loginbutton").click(function(){
-      var username = $(".username").val();
-      console.log(username);
-      var password = $(".password").val();
-      console.log(password);
-      console.log("Estoy en login script");
-      //Create the object that we want to pass, which is user
       var user = {
-        "username": username,
-        "password": password,
+        username: $username.val(),
+        password: $password.val(),
       };
-      console.log(user);
       $.ajax({
         headers: { 'content-type': 'application/json',"x-kii-appid": "XXXXX","x-kii-appkey":"XXXXX" },
         type: 'POST',
-        url:  BASE_URI.concat("auth/login"),
+        url: BASE_URI.concat("/auth/login"),
         data: JSON.stringify(user),
         dataType: 'json',
         success: function(data) {
-            console.log("Log in succesfully");
+            console.log("Se ha iniciado sesión correctamente");
             console.log(data);
             console.log(url);
+            alert('¡Te autentificaste correctamente');
             window.localStorage.setItem("user_id",data.user_id);
             window.localStorage.setItem("username",username);
-            var url = "http://localhost:8080/index.html";
-            window.open(url, "_self");
+            window.open("http://localhost:8080", "_self");
         },
         error: function(error){
-          if(error.status==402){
-            alert("User is already connected in other device. Please log out your account first");
-          }
           if(error.status==404){
-            alert("User doesn't exist. Your username or password may be wrong");
+            alert("¡Este nombre de usuario no existe en la API!");
+          }
+          if(error.status==500){
+            alert("¡Contraseña no coincide con el nombre de usuario introducido!");
           }
         }
     });

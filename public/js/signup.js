@@ -1,38 +1,50 @@
-//Global uri
-var BASE_URI = "http://localhost:8080/dsaApp/";
+//de momento lo ponemos como localhost después se cambiará a http://147.83.7.206:8080/dsaApp
+var BASE_URI="http://localhost:8080/dsaApp";
 
-//Calls when the document is ready
+//solo cuando esté preparado documento html
 $(document).ready(function(){
- //Code if the user clicks sign up button
- $("#signupbutton").click(function(){
-    var username = $(".username").val();
-    console.log(username);
-    var password = $(".password").val();
-    console.log(password);
-    console.log("Estoy en signup script");
-    //Create the object that we want to pass, which is user
-    var user = {
-      "username": username,
-      "password": password,
-    };
-    console.log(user);
-    $.ajax({
-      headers: { 'content-type': 'application/json',"x-kii-appid": "XXXXX","x-kii-appkey":"XXXXX" },
-      type: 'POST',
-      url:  BASE_URI.concat("user/registerUser"),
-      data: JSON.stringify(user),
-      dataType: 'json',
-      success: function(data) {
-          console.log("Sign up successfully");
-          console.log(data);
-          alert("User successfully created");
-          window.open("http://localhost:8080","_self");
-      },
-      error: function(error){
-        if(error.status==500){
-          alert("Username already exists. Use another username");
-        }
-      }
-  });
-});
+	var $users=$('#users');
+	//aqui pondremos todas las variables que se necesitan para introducir un usuario en la API
+	var $username = $('#username');
+	console.log(username);
+	var $password = $('#password');
+	console.log(password);
+	var $mail = $('#mail');
+	console.log(mail);
+	var $name = $('#name');
+	console.log(name);
+	var $lastname = $('#lastname');
+	console.log(lastname);
+	var $city = $('#city');
+	console.log(city);
+
+	$('#signupbutton').on('click', function(){
+		var user = {
+			username: $username.val(),
+			password: $password.val(),
+			mail: $mail.val(),
+			name: $name.val(),
+			lastname: $lastname.val(),
+			city: $city.val(),
+		};
+		console.log(user);
+		$.ajax({
+		    headers: {'content-type': 'application/json',"x-kii-appid": "XXXXX","x-kii-appkey":"XXXXX"},
+			type: 'POST',
+			url: BASE_URI.concat("/users/registerUser"),
+			data: JSON.stringify(user),
+			dataType: 'json',
+			success: function(data){
+				console.log("Usuario creado");
+				console.logo(data);
+				alert('¡Ya estás registrado en EETAC WARS!');
+				window.open("http://localhost:8080", "_self");
+			},
+			error: function(error){
+			if(error.status==500){
+				alert('¡Este nombre de usuario ya existe! Prueba introducir otro');
+				}
+			}
+		});
+	});
 });

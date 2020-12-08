@@ -1,6 +1,6 @@
 @font-face{
     font-family:valorant;
-    src:url(../fonts/valorant);
+    src:url(../fonts/Valorant Font.ttf);
 }
 @font-face{
     font-family:ReturnofGanon;
@@ -8,11 +8,11 @@
 }
 @font-face{
     font-family:American Captain;
-    src:url(../fonts/AmericanCaptain);
+    src:url(../fonts/American Captain.otf);
 }
 @font-face{
     font-family:Wanted;
-    src:url(../fonts/Wanted);
+    src:url(../fonts/Wanted M54.ttf);
 }
 @font-face{
     font-family:HyliaSerifBeta-Regular;
@@ -20,16 +20,16 @@
 }
 @font-face{
     font-family:Seagram tfb;
-    src:url(../fonts/Seagramtfb.ttf);
+    src:url(../fonts/Seagram tfb.ttf);
 }
 @font-face{
     font-family:CELTG;
-    src:url(fonts/CELTG.ttf);
+    src:url(fonts/CELTG.TTF);
 }
 
 @font-face{
     font-family:gw;
-    src:url(/fonts/gw.ttf);
+    src:url(/fonts/gw.TTF);
 }
 
 
