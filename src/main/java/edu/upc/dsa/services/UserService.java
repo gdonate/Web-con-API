@@ -79,7 +79,8 @@ public class UserService {
             System.out.println(user2);
             return Response.status(201).entity(user2).build();
         }
-        catch (ExistantUserException e){
+        catch (Exception e){
+            e.printStackTrace();
             return Response.status(500).build();
         }
     }
