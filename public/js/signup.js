@@ -3,29 +3,29 @@ var BASE_URI="http://147.83.7.206:8080/dsaApp";
 
 //solo cuando esté preparado documento html
 $(document).ready(function(){
-	var $users=$('#users');
+	var users=$('#users');
 	//aqui pondremos todas las variables que se necesitan para introducir un usuario en la API
-	var $username = $('#username');
+	var username = $('#username');
 	console.log(username);
-	var $password = $('#password');
+	var password = $('#password');
 	console.log(password);
-	var $mail = $('#mail');
+	var mail = $('#mail');
 	console.log(mail);
-	var $name = $('#name');
+	var name = $('#name');
 	console.log(name);
-	var $lastname = $('#lastname');
+	var lastname = $('#lastname');
 	console.log(lastname);
-	var $city = $('#city');
+	var city = $('#city');
 	console.log(city);
 
 	$('#signupbutton').on('click', function(){
 		var user = {
-			username: $username.val(),
-			password: $password.val(),
-			mail: $mail.val(),
-			name: $name.val(),
-			lastname: $lastname.val(),
-			city: $city.val(),
+			username: username.val(),
+			password: password.val(),
+			mail: mail.val(),
+			name: name.val(),
+			lastname: lastname.val(),
+			city: city.val(),
 		};
 		console.log(user);
 		$.ajax({
@@ -41,6 +41,7 @@ $(document).ready(function(){
 				window.open("http://localhost:8080", "_self");
 			},
 			error: function(error){
+			console.log("", error);
 			if(error.status==500){
 				alert('¡Este nombre de usuario ya existe! Prueba introducir otro');
 				}

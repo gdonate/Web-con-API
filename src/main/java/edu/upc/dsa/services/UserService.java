@@ -75,8 +75,9 @@ public class UserService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addUser(User user) {
         try {
-            this.gservice.addUser(user.getUsername(), user.getPassword(), user.getMail(), user.getName(), user.getLastname(), user.getCity());
-            return Response.status(201).build();
+            User user2 = this.gservice.addUser(user.getUsername(), user.getPassword(), user.getMail(), user.getName(), user.getLastname(), user.getCity());
+            System.out.println(user2);
+            return Response.status(201).entity(user2).build();
         }
         catch (ExistantUserException e){
             return Response.status(500).build();

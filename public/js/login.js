@@ -4,10 +4,10 @@ var BASE_URI="http://147.83.7.206:8080/dsaApp";
 //solo cuando esté preparado documento html
 $(document).ready(function(){
     //aqui pondremos todas las variables que se necesitan para inciar sesión usuario en la API
-    var $username = $('#username');
-	console.log(username);
-	var $password = $('#password');
-	console.log(password);
+    var username = $('#username');
+	console.log("username", username);
+	var password = $('#password');
+	console.log("password", password);
     //Code if the user clicks log in button
     $("#loginbutton").click(function(){
       var user = {
