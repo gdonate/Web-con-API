@@ -17,6 +17,4 @@ $(document).ready(function(){
 			alert('Error cargando todos los usuarios');
 		}
 	});
-	//ejemplo de como poner una función dentro
-	//$('#signupbutton').on('click', function(){ --- });
 });

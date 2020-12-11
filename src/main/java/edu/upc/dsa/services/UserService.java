@@ -67,19 +67,18 @@ public class UserService {
     @POST
     @ApiOperation(value = "registrar un usuario", notes = "x")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Successful", responseContainer = "List"),
-            @ApiResponse(code = 500, message="Existant user", responseContainer = "List")
+            @ApiResponse(code = 201, message = "Successful", response=void.class, responseContainer = "Void class"),
+            @ApiResponse(code = 500, message="Existant user")
     })
 
     @Path("/registerUser")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addUser(User user) {
         try {
-            User user2 = this.gservice.addUser(user.getUsername(), user.getPassword(), user.getMail(), user.getName(), user.getLastname(), user.getCity());
-            System.out.println(user2);
-            return Response.status(201).entity(user2).build();
+            this.gservice.addUser(user.getUsername(), user.getPassword(), user.getMail(), user.getName(), user.getLastname(), user.getCity());
+            return Response.status(201).entity(user).build();
         }
-        catch (Exception e){
+        catch (ExistantUserException e){
             e.printStackTrace();
             return Response.status(500).build();
         }

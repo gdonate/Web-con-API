@@ -89,14 +89,23 @@ public class GameManagerImpl implements GameManager {
     //funcion que implementa el contrato UserManager
     //función añadir usuario
     //Add a new User
-    public User addUser(String username, String password, String mail, String name, String lastname, String city) throws ExistantUserException{
+    public void addUser(String username, String password, String mail, String name, String lastname, String city) throws ExistantUserException {
         //por si hubiese mismo id cosa poco probable
         User user = this.users.get(username);
-        if(user!=null) throw new ExistantUserException();
-        user = new User(username, password, mail, name, lastname, city);
-        this.users.put(username, user);
-        logger.info("Nuevo usuario en el sistema: "+user.toString());
-        return user;
+        try {
+            if (user == null) {
+                user = new User(username, password, mail, name, lastname, city);
+                this.users.put(username, user);
+                logger.info("Nuevo usuario en el sistema: " + user.toString());
+            }
+            else{
+                throw new ExistantUserException();
+            }
+        }
+        catch (Exception e) {
+            logger.error("Error intentando abrir la sesión: " + e.getMessage());
+            throw new ExistantUserException();
+        }
     }
 
     public User getUserLogin(String username, String password) throws UserNotFoundException, PasswordNotMatchException{

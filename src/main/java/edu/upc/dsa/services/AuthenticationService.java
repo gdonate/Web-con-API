@@ -44,9 +44,9 @@ public class AuthenticationService {
     @POST
     @ApiOperation(value = "cargar el perfil", notes = "escribir el nombre de usuario y la contraseña para loggearse")
     @ApiResponses(value = {
-            @ApiResponse(code= 201, message = "Succesful", response= User.class, responseContainer="List"),
-            @ApiResponse(code= 404, message = "User not found", responseContainer="List"),
-            @ApiResponse(code=500, message="Password not match", responseContainer = "List")
+            @ApiResponse(code= 201, message = "Succesful", response= User.class, responseContainer="User"),
+            @ApiResponse(code= 404, message = "User not found"),
+            @ApiResponse(code=500, message="Password not match")
     })
 
     //parece que el login nos da buenos resultados
@@ -57,11 +57,11 @@ public class AuthenticationService {
             User user2 = this.gservice.getUserLogin(user.getUsername(), user.getPassword());
             System.out.println(user2);
             return Response.status(201).entity(user2).build();
-        } catch (UserNotFoundException e1){
-            e1.printStackTrace();
+        } catch (UserNotFoundException e){
+            e.printStackTrace();
             return Response.status(404).build();
-        } catch(Exception e2){
-            e2.printStackTrace();
+        } catch(PasswordNotMatchException e){
+            e.printStackTrace();
             return Response.status(500).build();
         }
     }

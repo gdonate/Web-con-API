@@ -1,35 +1,35 @@
 @font-face{
     font-family:valorant;
-    src:url(../fonts/Valorant Font.ttf);
+    src:url(../fonts/valorant.ttf);
 }
 @font-face{
-    font-family:ReturnofGanon;
-    src:url(../fonts/ReturnofGanon.ttf);
+    font-family:returnofganon;
+    src:url(../fonts/returnofganon.ttf);
 }
 @font-face{
     font-family:American Captain;
-    src:url(../fonts/American Captain.otf);
+    src:url(../fonts/americancaptain.otf);
 }
 @font-face{
-    font-family:Wanted;
-    src:url(../fonts/Wanted M54.ttf);
+    font-family:wanted;
+    src:url(../fonts/wanted.ttf);
 }
 @font-face{
-    font-family:HyliaSerifBeta-Regular;
-    src:url(../fonts/HyliaSerifBeta-Regular.otf);
+    font-family:hyliaserif;
+    src:url(../fonts/hyliaserif.otf);
 }
 @font-face{
-    font-family:Seagram tfb;
-    src:url(../fonts/Seagram tfb.ttf);
+    font-family:seagram;
+    src:url(../fonts/seagram.ttf);
 }
 @font-face{
-    font-family:CELTG;
-    src:url(fonts/CELTG.TTF);
+    font-family:celt;
+    src:url(../fonts/celt.ttf);
 }
 
 @font-face{
     font-family:gw;
-    src:url(/fonts/gw.TTF);
+    src:url(../fonts/gw.ttf);
 }
 
 
@@ -41,10 +41,10 @@ a,b{
 
 }
 p{
-    font-family: valorant;
+    font-family:valorant;
 }
 .titulo{
-    font-family: gw;
+    font-family:gw;
 
 }
 .descripcion{
