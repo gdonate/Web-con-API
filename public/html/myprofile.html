@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>My Profile</title>
+    <meta charset = "UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!--<link rel ="stylesheet" href ="../css/style.css">-->
+    <link rel ="stylesheet" type="text/css" href ="../css/fuentes.css"/>
+    <link rel ="stylesheet" href ="../css/customstyle.css">
+    <link rel="shortcut icon" type="image/png" href="../resources/logooo.png">
+    <script src="https://kit.fontawesome.com/fbbddd9141.js" crossorigin="anonymous"></script>
+    <!--libreria que se encarga de tratar funciones ajax-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- Función documento javascript que ejecuta algunas funciones extras de prueba -->
+    <script type="text/javascript" src="../js/myprofile.js"></script>
+</head>
+<!-- en la primera parte de la página editaremos la pestaña de arriba-->
+<!-- para hacerla visible al movil-->
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#myPage"><img src="../resources/logocabecera.png" alt="EETAC WARS" class="logotipo"></a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#myPage">INICIO</a></li>
+                <li><a href="#band">DESCUBRIR</a></li>
+                <li><a href="#tour">TIENDA</a></li>
+                <li><a href="#contact">LOGOUT</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">MORE
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Plugins</a></li>
+                        <li><a href="#">Comunidad</a></li>
+                        <li><a href="#">Media</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- aqui empieza toda la parte de slides que servirá para darle un contenido visual de nuestro juego-->
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicadores -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+        <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Movimiento de las slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="../resources/fondo0.jpg" width="1200" height="700">
+            <!--<div class="carousel-caption"></div>-->
+        </div>
+        <div class="item">
+            <img src="../resources/fondo1.jpg" width="1200" height="700">
+        </div>
+        <div class="item">
+            <img src="../resources/fondo2.jpg" width="1200" height="700">
+        </div>
+        <div class="item">
+            <img src="../resources/fondo3.jpg" width="1200" height="700">
+        </div>
+        <div class="item">
+            <img src="../resources/fondo4.jpg" width="1200" height="700">
+        </div>
+    </div>
+
+    <!-- Controles derecha e izquierda -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Anterior</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Siguiente</span>
+    </a>
+</div>
+
+<!-- para acabar añadiremos una consulta en el main principal, que será la obtención de todos los items-->
+<!-- Container de prueba para ver los usuarios actuales de la API -->
+<div id="prueba" class="container text-center">
+    <h3>Items del juego</h3>
+    <ul id="items"></ul>
+</div>
+
+<!-- aqui solo añadiremos el encabezado con la imagen correspondiente y quien ha hecho el servidor-->
+<!-- Imagen del encabezado, para que se vea mejor -->
+<img src="../resources/fondo5.jpg" class="img-responsive" style="width:100%">
+
+<!-- Encabezado de la página -->
+<footer class="text-center">
+    <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="Volver arriba">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+    </a><br><br>
+    <p>Servicio web desarrollado por el Grupo 4 de DSA</p>
+</footer>
+</body>
+</html>

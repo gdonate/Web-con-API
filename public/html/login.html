@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <title>Login</title>
     <meta charset = "UTF-8">
-    <link rel ="stylesheet" href ="/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel ="stylesheet" href ="../css/style.css">
     <link rel ="stylesheet" type="text/css" href ="../css/fuentes.css"/>
+    <link rel="shortcut icon" type="image/png" href="../resources/logooo.png">
     <script src="https://kit.fontawesome.com/fbbddd9141.js" crossorigin="anonymous"></script>
     <!--libreria que se encarga de tratar funciones ajax-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <scrip src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></scrip>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <!-- Función documento javascript que ejecuta algunas funciones extras de prueba -->
     <script type="text/javascript" src="../js/login.js"></script>
-    <title>EETAC WARS</title>
 </head>
 <body>
 <header>
@@ -31,10 +34,9 @@
         <section>
                 <form action="" method="post">
                     <h1>Login</h1>
-                    <input type="text" name="username" class="username" placeholder="Username">
-                    <input type="password" name="password" class="password" placeholder="Password">
-                    <button type="submit"><a href="../index.html">Send</a></button>
-                    <div class="error"><span>+</span></div>
+                    <input type="text" id="username" name="username" class="username" placeholder="Username">
+                    <input type="password" id="password" name="password" class="password" placeholder="Password">
+                    <button class="button" id="loginbutton"><a>Send</a></button>
                 </form>
         </section>
 </body>

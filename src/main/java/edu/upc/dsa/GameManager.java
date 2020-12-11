@@ -35,7 +35,7 @@ public interface GameManager {
     public Item updateItem(Item i) throws ItemNotFoundException;
 
     //añadimos dos funcines más a ver si login funciona
-    public User addUser(String username, String password, String mail, String name, String lastname, String city) throws ExistantUserException;
+    public void addUser(String username, String password, String mail, String name, String lastname, String city) throws ExistantUserException;
     public User getUserLogin(String username, String password) throws UserNotFoundException, PasswordNotMatchException;
     public User getUser(String username) throws UserNotFoundException;
     public void addImage(String username, String password, String image) throws UserNotFoundException, PasswordNotMatchException;

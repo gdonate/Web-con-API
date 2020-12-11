@@ -110,7 +110,7 @@ public class GameManagerTest {
     @Test(expected = ExistantUserException.class)
     public void testAddExistingUser() throws Exception {
         try {
-            User user = this.gtest.addUser("raul32", "heelloos", "raulloquesea", "Raúl", "Horta", "Barcelona");
+            this.gtest.addUser("raul32", "heelloos", "raulloquesea", "Raúl", "Horta", "Barcelona");
         }
         catch (NullPointerException e){
             log.info("NullPointerException caught");
