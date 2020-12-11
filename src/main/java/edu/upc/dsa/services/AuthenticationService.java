@@ -53,15 +53,18 @@ public class AuthenticationService {
     @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response logIn(User user){
-        try{
-            User u = this.gservice.getUserLogin(user.getUsername(), user.getPassword());
+       System.out.println("USER: "+ user);
+       User u =null;
+       try{
+            u = this.gservice.getUserLogin(user.getUsername(), user.getPassword());
             return Response.status(201).entity(u).build();
         } catch (UserNotFoundException e1){
+		System.out.println("ex: "+e1.getMessage()+"u"+u);
             e1.printStackTrace();
-            return Response.status(404).build();
+            return Response.status(404).entity(new User()).build();
         } catch(PasswordNotMatchException e2){
             e2.printStackTrace();
-            return Response.status(500).build();
+            return Response.status(500).entity(u).build();
         }
     }
 
