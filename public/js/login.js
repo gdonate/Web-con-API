@@ -1,5 +1,5 @@
 //de momento lo ponemos como localhost después se cambiará a http://147.83.7.206:8080/dsaApp
-var BASE_URI="http://localhost:8080/dsaApp";
+var BASE_URI="http://147.83.7.206:8080/dsaApp";
 
 //solo cuando esté preparado documento html
 $(document).ready(function(){
@@ -31,7 +31,7 @@ $(document).ready(function(){
             //window.localStorage.setItem("password",password);
             //con esta última indicación redirigimos al usuario a la nueva pagina
             //con _self lo hacemos en la misma ventana, con _blank le llevaríamos a otra en blanco
-            window.open("http://localhost:8080/html/myprofile.html", "_self");
+            window.open("http://147.83.7.206:8080/html/myprofile.html", "_self");
         },
         error: function(error){
           if(error.status==404){
