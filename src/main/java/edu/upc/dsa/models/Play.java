@@ -6,76 +6,81 @@ import java.util.List;
 
 public class Play {
 
-    //atributos modelo Partida
-    String id;
-    String positionX;
-    String positionY;
-    String totalKills;
-    String total;
-    String time;
+    //revisar modelo partida
+    private int id;
+    private int positionX;
+    private int positionY;
+    private int total;
+    private int time;
 
     //hay que recordar que una partida tendrá una serie de mapas
     //como no habrá muchos mapas en el juego nos hemos decidido por una LinkedList
-    List<Map> mapsByPlay;
+    //List<Map> mapsByPlay;
 
     //constructor vacio, basico y getters y setters
     public Play() {
     }
 
     //constructor básico
-    public Play(String id, String positionX, String positionY) {
+    public Play(Integer id, Integer positionX, Integer positionY, Integer total, Integer time) {
         this.id = id;
         this.positionX = positionX;
         this.positionY = positionY;
-        this.mapsByPlay = new LinkedList<>();
+        this.total = total;
+        this.time = time;
+        //this.mapsByPlay = new LinkedList<>();
     }
 
     //getters y setters
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getPositionX() {
+    public int getPositionX() {
         return positionX;
     }
 
-    public void setPositionX(String positionX) {
+    public void setPositionX(int positionX) {
         this.positionX = positionX;
     }
 
-    public String getPositionY() {
+    public int getPositionY() {
         return positionY;
     }
 
-    public void setPositionY(String positionY) {
+    public void setPositionY(int positionY) {
         this.positionY = positionY;
     }
 
-    public String getTotalKills() {
-        return totalKills;
-    }
-
-    public void setTotalKills(String totalKills) {
-        this.totalKills = totalKills;
-    }
-
-    public String getTotal() {
+    public int getTotal() {
         return total;
     }
 
-    public void setTotal(String total) {
+    public void setTotal(int total) {
         this.total = total;
     }
 
-    public String getTime() {
+    public int getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(int time) {
         this.time = time;
+    }
+
+    //devolver partida en string
+    @Override
+    public String toString() {
+        return "Play{" +
+                "id=" + id +
+                ", positionX=" + positionX +
+                ", positionY=" + positionY +
+                ", total=" + total +
+                ", time=" + time +
+                '}';
     }
 }

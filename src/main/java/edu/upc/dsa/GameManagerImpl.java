@@ -80,7 +80,7 @@ public class GameManagerImpl implements GameManager {
         int idUser;
 
         if(!username.equals(user.getUsername()) && !password.equals(user.getPassword())) throw new UserNotFoundException();
-        idUser= Integer.parseInt(user.getId());
+        idUser= user.getId();
         logger.info("Id del usuario "+username+ " es: "+idUser);
         return idUser;
     }
@@ -89,12 +89,12 @@ public class GameManagerImpl implements GameManager {
     //funcion que implementa el contrato UserManager
     //función añadir usuario
     //Add a new User
-    public void addUser(String username, String password, String mail, String name, String lastname, String city) throws ExistantUserException {
+    public void addUser(String username, String mail, String name, String lastname, String city, String password, boolean connected) throws ExistantUserException {
         //por si hubiese mismo id cosa poco probable
         User user = this.users.get(username);
         try {
             if (user == null) {
-                user = new User(username, password, mail, name, lastname, city);
+                user = new User(username, mail, name, lastname, city,  password, connected);
                 this.users.put(username, user);
                 logger.info("Nuevo usuario en el sistema: " + user.toString());
             }
@@ -145,7 +145,7 @@ public class GameManagerImpl implements GameManager {
     }
 
     @Override
-    public void addEnemy(String id, String name, String total, String idMap) throws MapFullException, MapNotFoundException{
+    public void addEnemy(String name, String type, Integer life, Integer idMap, Integer positionX, Integer positionY, Integer idUser) throws MapFullException, MapNotFoundException{
         Map map = null;
         for(int i = 0; i<this.numMaps; i++){
             if(idMap.equals(this.mapsByPlay.get(i).getId())){
@@ -157,9 +157,9 @@ public class GameManagerImpl implements GameManager {
         //si hay un mapa
         if (map != null){
             LinkedList<Enemy> enemies = (LinkedList<Enemy>) map.getEnemiesByMap();
-            int maxenemies = Integer.parseInt(map.getTotal());
+            int maxenemies = map.getTotal();
             if(enemies.size() < maxenemies){
-                map.addEnemy(new Enemy(id, name, total, idMap));
+                map.addEnemy(new Enemy(name, type, life, idMap, positionX, positionY, idUser));
             }
             else{
                 logger.error("¡El mapa que ústed quiere para añadir un enemigo está lleno!");
@@ -173,7 +173,7 @@ public class GameManagerImpl implements GameManager {
     }
 
     @Override
-    public void addAlly(String id, String name, String total, String idMap) throws MapFullException, MapNotFoundException {
+    public void addAlly(String name, String type, Integer life, Integer idMap, Integer positionX, Integer positionY, Integer idUser) throws MapFullException, MapNotFoundException {
         Map map = null;
         for(int i = 0; i<this.numMaps; i++){
             if(idMap.equals(this.mapsByPlay.get(i).getId())){
@@ -185,9 +185,9 @@ public class GameManagerImpl implements GameManager {
         //si hay un mapa
         if (map != null){
             LinkedList<Ally> allies = (LinkedList<Ally>) map.getAlliesByMap();
-            int maxallies = Integer.parseInt(map.getTotal());
+            int maxallies = map.getTotal();
             if(allies.size() < maxallies){
-                map.addAlly(new Ally(id, name, total, idMap));
+                map.addAlly(new Ally(name, type, life, idMap, positionX, positionY, idUser));
             }
             else{
                 logger.error("¡El mapa que ústed quiere para añadir un enemigo está lleno!");
@@ -216,7 +216,7 @@ public class GameManagerImpl implements GameManager {
 
         for(Item item: this.items){
             if(item.getName().equals(name)){
-                logger.info("getTrack("+name+"): " +item);
+                logger.info("getItem("+name+"): " +item);
                 return item;
             }
         }
@@ -306,7 +306,9 @@ public class GameManagerImpl implements GameManager {
             logger.info(i+" recibido");
 
             item.setName(i.getName());
-            item.setTotal(i.getTotal());
+            item.setType(i.getType());
+            item.setObjectPoints(i.getObjectPoints());
+            item.setPrice(i.getPrice());
 
             logger.info(item+" actualizado");
         }
@@ -323,8 +325,8 @@ public class GameManagerImpl implements GameManager {
     }
 
     //añadir item al juego
-    public Item addItem(String name, String total){
-        return this.addItem(new Item(name, total));
+    public Item addItem(String name, String type, Integer objectPoints, Integer price){
+        return this.addItem(new Item(name, type, objectPoints, price));
     }
 
 

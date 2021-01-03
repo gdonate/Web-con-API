@@ -27,10 +27,10 @@ public class GameManagerTest {
         this.gtest=GameManagerImpl.getInstance();
 
         log.info("Agregamos los 4 primeros usuarios al sistema antes de iniciar el juego");
-        this.gtest.addUser("pepe15", "hola","pepe@hotmail.es", "Pepe", "Hernández", "Paris");
-        this.gtest.addUser("marcosz45", "bye","marcos45@hotmail.es", "Marcos", "Pérez", "Madrid");
-        this.gtest.addUser("raul32", "hello","raul32@hotmail.es", "Raúl", "Rodríguez", "San Sebastián");
-        this.gtest.addUser("helenapr", "adios","helenapr@hotmail.es", "Helena", "Mata", "León");
+        this.gtest.addUser("pepe15", "pepe@hotmail.es","Pepe", "Hernández", "Paris", "hola", false);
+        this.gtest.addUser("marcosz45", "marcos45@hotmail.es","Marcos", "Pérez", "Madrid", "bye", false);
+        this.gtest.addUser("raul32", "raul32@hotmail.es","Raúl", "Rodríguez", "San Sebastián", "hello", false);
+        this.gtest.addUser("helenapr", "helenapr@hotmail.es","Helena", "Mata", "León", "buenas", false);
 
         //nos faltan añadir más parámetros antes de que empiece el juego
 
@@ -41,7 +41,7 @@ public class GameManagerTest {
     public void testAddUser() throws ExistantUserException {
         try {
             log.info("Añadimos otro más para comprobar la función testAddUser");
-            this.gtest.addUser("blancas", "otra", "blanca@hotmail.es", "Blanca", "Sanchez", "Barcelona");
+            this.gtest.addUser("blanca5", "blanca@hotmail.es", "Blanca", "Sanchez", "Barcelona", "otra", false);
             Assert.assertEquals(5, this.gtest.numUsers());
         }
 
@@ -110,7 +110,7 @@ public class GameManagerTest {
     @Test(expected = ExistantUserException.class)
     public void testAddExistingUser() throws Exception {
         try {
-            this.gtest.addUser("raul32", "heelloos", "raulloquesea", "Raúl", "Horta", "Barcelona");
+            this.gtest.addUser("raul32", "raul32@hotmail.es","Raúl", "Rodríguez", "San Sebastián", "hello", false);
         }
         catch (NullPointerException e){
             log.info("NullPointerException caught");

@@ -5,51 +5,53 @@ import java.util.List;
 public class Item {
 
     //atributos del modelo Item
-    String id;
-    String name;
-    String level;
-    String type;
-    //atributo total = cantidad de un item
-    String total;
+    private int id;
+    private String name;
+    private String type;
+    //atributo eliminado String total;
+    //precio del item
+    private int price;
     //el atributo value viene conectado a través del nivel del jugador
-    String value;
-    String image;
+    private int value;
+    private String image;
     //id del jugador que tiene estos items
-    String idPlayer;
+    private int idPlayer;
+
+    //falta relacionar atributos base datos: objectPoints
+    private int objectPoints;
 
     //obtener la lista de usuarios que tienen un ítem en concreto
-    List<User> itemsByUser;
+    //List<User> itemsByUser;
 
     //constructor vacio para el json
-    public Item(String id) {
+    public Item(Integer id) {
     }
 
     //constructor vacio, con parametros, getters y setters
     public Item() {
     }
 
-    public Item(String name, String total) {
+    public Item(String name, String type) {
         this.name = name;
-        this.total = total;
+        this.type = type;
     }
 
     //constructor completo
-    public Item(String name, String level, String type, String total, String value, String image, List<User> itemsByUser) {
+    public Item(String name, String type, Integer objectPoints, Integer price) {
         this.name = name;
-        this.level = level;
         this.type = type;
-        this.total = total;
-        this.value = value;
-        this.image = image;
-        this.itemsByUser = itemsByUser;
+        this.objectPoints = objectPoints;
+        this.price = price;
+        //this.itemsByUser = itemsByUser;
     }
 
+    //getters y setters
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -61,14 +63,6 @@ public class Item {
         this.name = name;
     }
 
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
-    }
-
     public String getType() {
         return type;
     }
@@ -77,35 +71,57 @@ public class Item {
         this.type = type;
     }
 
-    public String getTotal() {
-        return total;
+    public int getPrice() {
+        return price;
     }
 
-    public void setTotal(String total) {
-        this.total = total;
+    public void setPrice(int price) {
+        this.price = price;
     }
 
-    public String getValue() {
+    public int getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(int value) {
         this.value = value;
     }
 
-    public String getIdPlayer() {
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public int getIdPlayer() {
         return idPlayer;
     }
 
-    public void setIdPlayer(String idPlayer) {
+    public void setIdPlayer(int idPlayer) {
         this.idPlayer = idPlayer;
+    }
+
+    public int getObjectPoints() {
+        return objectPoints;
+    }
+
+    public void setObjectPoints(int objectPoints) {
+        this.objectPoints = objectPoints;
     }
 
     @Override
     public String toString() {
         return "Item{" +
-                "name='" + name + '\'' +
-                ", total='" + total + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", price=" + price +
+                ", value=" + value +
+                ", image='" + image + '\'' +
+                ", idPlayer=" + idPlayer +
+                ", objectPoints=" + objectPoints +
                 '}';
     }
 }

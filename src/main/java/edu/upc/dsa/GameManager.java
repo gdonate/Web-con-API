@@ -17,7 +17,7 @@ public interface GameManager {
     //public void addUser(String id, String username, String password);
     //añadir un item al juego / como admin / no como user
     public Item addItem(Item item);
-    public Item addItem(String name, String total);
+    public Item addItem(String name, String type, Integer objectPoints, Integer price);
 
     //obtener un item
     public Item getItem(String name) throws ItemNotFoundException;
@@ -35,7 +35,7 @@ public interface GameManager {
     public Item updateItem(Item i) throws ItemNotFoundException;
 
     //añadimos dos funcines más a ver si login funciona
-    public void addUser(String username, String password, String mail, String name, String lastname, String city) throws ExistantUserException;
+    public void addUser(String username, String mail, String name, String lastname, String city,  String password, boolean connected) throws ExistantUserException;
     public User getUserLogin(String username, String password) throws UserNotFoundException, PasswordNotMatchException;
     public User getUser(String username) throws UserNotFoundException;
     public void addImage(String username, String password, String image) throws UserNotFoundException, PasswordNotMatchException;
@@ -45,8 +45,8 @@ public interface GameManager {
     public int numItems();
 
     //seguimos añadiendo objetos en los linkedlist
-    public void addEnemy(String id, String level, String total, String idMap) throws MapFullException, MapNotFoundException;
-    public void addAlly(String id, String level, String total, String idMap) throws MapFullException, MapNotFoundException;
+    public void addEnemy(String name, String type, Integer life, Integer idMap, Integer positionX, Integer positionY, Integer idUser) throws MapFullException, MapNotFoundException;
+    public void addAlly(String name, String type, Integer life, Integer idMap, Integer positionX, Integer positionY, Integer idUser) throws MapFullException, MapNotFoundException;
 
     //salvar el estado de la partida y recuperar ese estado
     public void saveStatus(String idPlay, String username);

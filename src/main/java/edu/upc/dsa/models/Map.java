@@ -5,12 +5,12 @@ import java.util.List;
 
 public class Map {
 
-    //atributos de nuestro modelo Mapa
-    String id;
-    String name;
-    String level;
+    //revisar modelo Mapa
+    private String id;
+    private String name;
+    private int level;
     //por si no se entende muy bien total significa la cantidad de mapas
-    String total;
+    private int total;
 
     //nos faltará incluir las diferentes listas o arrays sobre items/enemigos/aliados
     //por si hay que modificar bastante
@@ -27,15 +27,17 @@ public class Map {
     }
 
     //constructor basico
-    public Map(String id, String level, String total) {
+    public Map(String id, String name, Integer level, Integer total) {
         this.id = id;
+        this.name = name;
         this.level = level;
         this.total = total;
-        this.enemiesByMap = new LinkedList<>();
-        this.alliesByMap = new LinkedList<>();
-        this.itemsByMap = new LinkedList<>();
+        //this.enemiesByMap = new LinkedList<>();
+        //this.alliesByMap = new LinkedList<>();
+        //this.itemsByMap = new LinkedList<>();
     }
 
+    //getters y setters
     public String getId() {
         return id;
     }
@@ -52,19 +54,19 @@ public class Map {
         this.name = name;
     }
 
-    public String getLevel() {
+    public int getLevel() {
         return level;
     }
 
-    public void setLevel(String level) {
+    public void setLevel(int level) {
         this.level = level;
     }
 
-    public String getTotal() {
+    public int getTotal() {
         return total;
     }
 
-    public void setTotal(String total) {
+    public void setTotal(int total) {
         this.total = total;
     }
 

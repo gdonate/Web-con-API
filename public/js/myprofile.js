@@ -1,5 +1,5 @@
 //de momento lo ponemos como localhost después se cambiará a http://147.83.7.206:8080/dsaApp
-var BASE_URI="http://147.83.7.206:8080/dsaApp";
+var BASE_URI="http://localhost:8080/dsaApp";
 
 //solo cuando esté preparado documento html
 $(document).ready(function(){

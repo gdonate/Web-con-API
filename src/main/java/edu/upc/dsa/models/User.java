@@ -1,7 +1,5 @@
 package edu.upc.dsa.models;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 //Usuario = Jugador
@@ -11,19 +9,30 @@ public class User {
     //aplicando modelo de usuario del juego
     //en el UML teniamos usuario y jugador
     //lo modificaremos de tal manera que usuario y jugador sean lo mismo
-    String id;
-    String username;
-    String mail;
-    String name;
-    String lastname;
-    String city;
-    String password;
-    String image;
+    //integer
+    private int id;
+    private String username;
+    private String mail;
+    private String name;
+    private String lastname;
+    private String city;
+    private String password;
+    private String image;
+
+    //falta relacionar atributos base datos: conected, actualLife, maxLife, attack, checkPoint
+    //points, enemiesKilled
+    private boolean connected;
+    private int actualLife;
+    private int maxLife;
+    private int attack;
+    private int checkPoint;
+    private int points;
+    private int enemiesKilled;
 
     //atributos originalmente para jugador pero finalmente para usuario
     //de momento solo añadimos estos dos, se pueden añadir mucho más depende la complejidad del juego
-    String life;
-    String level;
+    //integer
+    private int level;
 
     //los atributos/listas que posee un usuario
     //un usuario tendrá items: espadas, escudos y también un número de partidas
@@ -33,7 +42,7 @@ public class User {
     List <Item> itemsByPlayer;
 
     //constructor vacio para el json
-    public User(String id) {
+    public User(Integer id) {
     }
 
     //constructor vacio error para el 415
@@ -41,35 +50,41 @@ public class User {
     public User() {
     }
 
+    //de momento quitamos los arrays de los constructores debido a un problema de serialización
+    //clase UserTO
+
     //constructor a parte para añadir usuarios con lo básico
-    public User(String username, String password, String mail, String name, String lastname, String city) {
+    public User(String username, String mail, String name, String lastname, String city, String password, boolean connected) {
         //nuevo constructor
         this.username = username;
-        this.password=password;
         this.mail = mail;
         this.name=name;
         this.lastname=lastname;
         this.city=city;
-        this.playsByPlayer = new ArrayList<>();
-        this.itemsByPlayer = new ArrayList<>();
+        this.password=password;
+        this.connected = connected;
+        //this.playsByPlayer = new ArrayList<>();
+        //this.itemsByPlayer = new ArrayList<>();
     }
 
     //constructor para register básico y más simple
-    public User(String username, String password) {
+    public User(String username, String password, boolean connected) {
         //this.id = id;
         this.username = username;
         this.password = password;
-        this.playsByPlayer = new ArrayList<>();
-        this.itemsByPlayer = new ArrayList<>();
+        this.connected = connected;
+        //this.playsByPlayer = new ArrayList<>();
+        //this.itemsByPlayer = new ArrayList<>();
     }
 
 
     //ahora pondremos los getters y setters
-    public String getId() {
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -121,22 +136,6 @@ public class User {
         this.password = password;
     }
 
-    public String getLife() {
-        return life;
-    }
-
-    public void setLife(String life) {
-        this.life = life;
-    }
-
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
-    }
-
     public String getImage() {
         return image;
     }
@@ -145,21 +144,85 @@ public class User {
         this.image = image;
     }
 
-    //a continuación pondremos el tostring por si hace falta mostrarlo por consola
+    public boolean isConnected() {
+        return connected;
+    }
 
+    public void setConnected(boolean connected) {
+        this.connected = connected;
+    }
+
+    public int getActualLife() {
+        return actualLife;
+    }
+
+    public void setActualLife(int actualLife) {
+        this.actualLife = actualLife;
+    }
+
+    public int getMaxLife() {
+        return maxLife;
+    }
+
+    public void setMaxLife(int maxLife) {
+        this.maxLife = maxLife;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
+    public int getCheckPoint() {
+        return checkPoint;
+    }
+
+    public void setCheckPoint(int checkPoint) {
+        this.checkPoint = checkPoint;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public int getEnemiesKilled() {
+        return enemiesKilled;
+    }
+
+    public void setEnemiesKilled(int enemiesKilled) {
+        this.enemiesKilled = enemiesKilled;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+
+    //a continuación pondremos el tostring por si hace falta mostrarlo por consola
 
     @Override
     public String toString() {
         return "User{" +
-                "username='" + username + '\'' +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
                 ", mail='" + mail + '\'' +
                 ", name='" + name + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", city='" + city + '\'' +
                 ", password='" + password + '\'' +
                 ", image='" + image + '\'' +
-                ", life='" + life + '\'' +
-                ", level='" + level + '\'' +
+                ", connected=" + connected +
                 '}';
     }
 }

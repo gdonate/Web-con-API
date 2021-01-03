@@ -26,11 +26,11 @@ public class GameService {
     public GameService() {
         this.gservice = GameManagerImpl.getInstance();
         if (gservice.numItems() == 0) {
-            this.gservice.addItem("poción","3");
-            this.gservice.addItem("escudo","2");
-            this.gservice.addItem("espada","1");
-            this.gservice.addItem("armadura","2");
-            this.gservice.addItem("casco","3");
+            this.gservice.addItem("espada","Ataque",1,10);
+            this.gservice.addItem("martillo","Ataque",2,60);
+            this.gservice.addItem("arco","Ataque",5,40);
+            this.gservice.addItem("escudo","Defensa", 3,30);
+            this.gservice.addItem("armadura","Defensa",6,40);
         }
     }
 
@@ -75,8 +75,10 @@ public class GameService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addItem(Item item) {
         String name = item.getName();
-        String total = item.getTotal();
-        this.gservice.addItem(name, total);
+        String type = item.getType();
+        Integer objectPoints = item.getObjectPoints();
+        Integer price = item.getPrice();
+        this.gservice.addItem(name, type, objectPoints, price);
 
         return Response.status(201).build();
     }
