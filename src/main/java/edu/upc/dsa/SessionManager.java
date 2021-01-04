@@ -15,7 +15,7 @@ public interface SessionManager<E> {
     Object get(Class theClass, int ID);
     public void update(Object object, int ID);
     public void delete(Object object, int ID);
-    List<Object> findAll(Class theClass);
+    List<Object> findAll(Class theClass);//noa
     //customList
     List<Object> findAll(Class theClass, HashMap params); // de momento no está implementado
     //de momento no la estamos utilizando
