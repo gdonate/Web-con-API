@@ -13,10 +13,6 @@ public class Play {
     private int total;
     private int time;
 
-    //hay que recordar que una partida tendrá una serie de mapas
-    //como no habrá muchos mapas en el juego nos hemos decidido por una LinkedList
-    //List<Map> mapsByPlay;
-
     //constructor vacio, basico y getters y setters
     public Play() {
     }
@@ -28,7 +24,6 @@ public class Play {
         this.positionY = positionY;
         this.total = total;
         this.time = time;
-        //this.mapsByPlay = new LinkedList<>();
     }
 
     //getters y setters

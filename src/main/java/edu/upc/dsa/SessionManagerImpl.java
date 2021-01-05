@@ -269,6 +269,30 @@ public class SessionManagerImpl implements SessionManager{
         return null;
     }
 
+    @Override
+    public int findMax(Class theClass) {
+        String selectMaxQuery = QueryHelper.findMaxQuery(theClass);
+        //inicializamos integer del id debido a error que luego daremos valor real
+        int idMax = 0;
+
+        //preparar valores que hay que pasar a la consulta
+        ResultSet rs;
+        PreparedStatement pstm;
+
+        try {
+            pstm = connection.prepareStatement(selectMaxQuery);
+            rs = pstm.executeQuery();
+
+            //No nos va a devolver directamente el id está una fila por debajo
+            rs.next();
+            idMax = rs.getInt(1);
+
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return idMax;
+    }
+
     //operación consulta para verificar un tipo de query
     //ejemplo de consulta que luego se borrará
     @Override

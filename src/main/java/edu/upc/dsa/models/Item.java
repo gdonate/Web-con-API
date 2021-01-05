@@ -20,9 +20,6 @@ public class Item {
     //falta relacionar atributos base datos: objectPoints
     private int objectPoints;
 
-    //obtener la lista de usuarios que tienen un ítem en concreto
-    //List<User> itemsByUser;
-
     //constructor vacio para el json
     public Item(Integer id) {
     }
@@ -42,7 +39,6 @@ public class Item {
         this.type = type;
         this.objectPoints = objectPoints;
         this.price = price;
-        //this.itemsByUser = itemsByUser;
     }
 
     //getters y setters

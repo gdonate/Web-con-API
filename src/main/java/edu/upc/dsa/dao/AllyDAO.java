@@ -14,4 +14,7 @@ public interface AllyDAO {
     public List<Ally> getAllies();
     public List<Ally> getAlliesByLevel(int level);
 
+    //encuentra el número máximo de aliados
+    public int findMax();
+
 }

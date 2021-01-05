@@ -15,11 +15,13 @@ public interface SessionManager<E> {
     Object get(Class theClass, int ID);
     public void update(Object object, int ID);
     public void delete(Object object, int ID);
-    List<Object> findAll(Class theClass);//noa
+    List<Object> findAll(Class theClass);
     //customList
     List<Object> findAll(Class theClass, HashMap params); // de momento no está implementado
     //de momento no la estamos utilizando
     List<Object> query(String query, Class theClass, HashMap params); //alternativa, de momento sin utilidad
+    //función devuelve máximo de cualquier tabla
+    public int findMax(Class theClass);
 
     //obtener id de cualquier clase dando su username y password
     public int getId(Class theClass, String username, String password) throws UserNotFoundException;

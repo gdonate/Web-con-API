@@ -29,6 +29,9 @@ public class UserService {
     //instancia privada para hacer el gservice
     private GameManager gservice;
 
+    //procedemos a cambiar el GameManager por el DataBase que es quien gestiona todos los servicios en realidad
+    //llamaremos a todos los daos y gestionaremos a partir de ahí
+
     public UserService() throws Exception {
         this.gservice = GameManagerImpl.getInstance();
         if (gservice.numUsers() == 0) {

@@ -13,5 +13,9 @@ public interface EnemyDAO {
     public void deleteEnemy(int id);
     public List<Enemy> getEnemies();
     public List<Enemy> getEnemiesByLevel(int level);
+    //eliminar un enemigo de un usuario, cuando estén luchando
+    public void deleteEnemyUser(int idUser, int id);
 
+    //encuentra el número máximo de enemigos
+    public int findMax();
 }

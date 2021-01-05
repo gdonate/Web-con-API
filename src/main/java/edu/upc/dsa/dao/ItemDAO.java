@@ -13,5 +13,9 @@ public interface ItemDAO {
     public void deleteItem(int id);
     public List<Item> getItems();
     public List<Item> getItemsByPrice(int price);
+    //obtener los items de un usuario
+    public List<Item> getAllItemsUser(int idUser);
 
+    //encuentra el número máximo de items
+    public int findMax();
 }

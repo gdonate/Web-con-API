@@ -1,6 +1,22 @@
 package edu.upc.dsa.dao;
 
+import edu.upc.dsa.GameManager;
+import edu.upc.dsa.GameManagerImpl;
+import org.apache.log4j.Logger;
+
 public class DAOManagerImpl implements DAOManager {
+
+    //log4j info
+    //en principio no creo que lo necesitemos
+    final static Logger log = Logger.getLogger(DAOManagerImpl.class);
+    private static DAOManager instance;
+    //constructor privado
+    private DAOManagerImpl(){}
+    //Singleton
+    public static DAOManager getInstance() {
+        if (instance==null) instance = new DAOManagerImpl();
+        return instance;
+    }
 
     //creamos las variables de cada dao y gestionamos la obtención de cada DAO abajo
     private UserDAO users = null;
@@ -13,7 +29,7 @@ public class DAOManagerImpl implements DAOManager {
     @Override
     public UserDAO getUserDAO() {
         if(users == null){
-            users = new UserDAOImpl();
+            this.users = UserDAOImpl.getInstance();
         }
         return users;
     }
@@ -21,7 +37,7 @@ public class DAOManagerImpl implements DAOManager {
     @Override
     public ItemDAO getItemDAO() {
         if(items == null){
-            items = new ItemDAOImpl();
+            this.items = ItemDAOImpl.getInstance();
         }
         return items;
     }
@@ -29,7 +45,7 @@ public class DAOManagerImpl implements DAOManager {
     @Override
     public EnemyDAO getEnemyDAO() {
         if(enemies == null){
-            enemies = new EnemyDAOImpl();
+            this.enemies = EnemyDAOImpl.getInstance();
         }
         return enemies;
     }
@@ -37,7 +53,7 @@ public class DAOManagerImpl implements DAOManager {
     @Override
     public AllyDAO getAllyDAO() {
         if(allies == null){
-            allies = new AllyDAOImpl();
+            this.allies = AllyDAOImpl.getInstance();
         }
         return allies;
     }

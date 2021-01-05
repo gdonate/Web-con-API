@@ -36,16 +36,15 @@ public class QueryHelper {
             sb.append(", ");
         }
 
-        //borrar la coma final
-        sb.delete(sb.length() -1, sb.length());
+        //borrar la coma y el espacio final
+        sb.delete(sb.length() -2, sb.length());
         sb.append(") VALUES (");
 
         for (String field: fields) {
-            sb.append("? ");
-            sb.append(", ");
+            sb.append("? , ");
         }
 
-        sb.delete(sb.length() -1, sb.length());
+        sb.delete(sb.length() -2, sb.length());
         sb.append(");"); //hemos añadido la coma por si acaso al final de la sentencia
         //valorar de poner ; después de cada sentencia?, después de where id = ?
         //sb.append(";");
@@ -145,6 +144,14 @@ public class QueryHelper {
     public static String findAllQuery(Class theClass){
         StringBuffer sb = new StringBuffer();
         sb.append("SELECT * FROM ").append(theClass.getSimpleName()).append(";");
+
+        return sb.toString();
+    }
+
+    //devuelve el tamaño máximo de cualquier tabla de la base de datos
+    public static String findMaxQuery(Class theClass){
+        StringBuffer sb = new StringBuffer();
+        sb.append("SELECT MAX(ID) AS ID FROM ").append(theClass.getSimpleName()).append(";");
 
         return sb.toString();
     }

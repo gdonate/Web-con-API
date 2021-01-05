@@ -31,7 +31,6 @@ public class Enemy {
         this.positionX = positionX;
         this.positionY = positionY;
         this.idUser = idUser;
-
     }
 
     //getters y setters

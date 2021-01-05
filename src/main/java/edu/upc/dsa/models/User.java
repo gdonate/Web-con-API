@@ -34,13 +34,6 @@ public class User {
     //integer
     private int level;
 
-    //los atributos/listas que posee un usuario
-    //un usuario tendrá items: espadas, escudos y también un número de partidas
-    //tanto para items como para partidas vamos a crear arrays ya que creemos
-    //habrán muchas armas, pociones y muchisimas partidas de cada usuario
-    List <Play> playsByPlayer;
-    List <Item> itemsByPlayer;
-
     //constructor vacio para el json
     public User(Integer id) {
     }
@@ -63,18 +56,34 @@ public class User {
         this.city=city;
         this.password=password;
         this.connected = connected;
-        //this.playsByPlayer = new ArrayList<>();
-        //this.itemsByPlayer = new ArrayList<>();
     }
 
     //constructor para register básico y más simple
     public User(String username, String password, boolean connected) {
-        //this.id = id;
         this.username = username;
         this.password = password;
         this.connected = connected;
-        //this.playsByPlayer = new ArrayList<>();
-        //this.itemsByPlayer = new ArrayList<>();
+    }
+
+    //nuevo constructor entero para info app android
+
+    public User(int id, String username, String mail, String name, String lastname, String city, String password, String image, boolean connected, int actualLife, int maxLife, int attack, int checkPoint, int points, int enemiesKilled, int level) {
+        this.id = id;
+        this.username = username;
+        this.mail = mail;
+        this.name = name;
+        this.lastname = lastname;
+        this.city = city;
+        this.password = password;
+        this.image = image;
+        this.connected = connected;
+        this.actualLife = actualLife;
+        this.maxLife = maxLife;
+        this.attack = attack;
+        this.checkPoint = checkPoint;
+        this.points = points;
+        this.enemiesKilled = enemiesKilled;
+        this.level = level;
     }
 
 

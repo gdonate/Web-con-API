@@ -2,13 +2,27 @@ package edu.upc.dsa.dao;
 
 import edu.upc.dsa.FactorySessionManager;
 import edu.upc.dsa.SessionManager;
+import edu.upc.dsa.models.Ally;
 import edu.upc.dsa.models.Enemy;
 import edu.upc.dsa.models.Item;
+import org.apache.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.List;
 
 public class EnemyDAOImpl implements EnemyDAO {
+
+    //log4j info
+    final static Logger log = Logger.getLogger(EnemyDAOImpl.class);
+    private static EnemyDAO instance;
+    //constructor privado
+    private EnemyDAOImpl(){}
+    //Singleton
+    public static EnemyDAO getInstance() {
+        if (instance==null) instance = new EnemyDAOImpl();
+        return instance;
+    }
+
     @Override
     public int addEnemy(String name, String type, int life, int map, int positionX, int positionY, int user_id) {
         SessionManager session = null;
@@ -19,7 +33,7 @@ public class EnemyDAOImpl implements EnemyDAO {
             session.save(enemy);
         }
         catch (Exception e) {
-            // LOG
+            log.error("Error añadiendo una entidad", e);
         }
         finally {
             session.close();
@@ -36,7 +50,7 @@ public class EnemyDAOImpl implements EnemyDAO {
             enemy = (Enemy)session.get(Enemy.class, id);
         }
         catch (Exception e) {
-            // LOG
+            log.error("Error al obtener una entidad", e);
         }
         finally {
             session.close();
@@ -61,7 +75,7 @@ public class EnemyDAOImpl implements EnemyDAO {
             session.update(Enemy.class, id);
         }
         catch (Exception e) {
-            // LOG
+            log.error("Error al modificar una entidad", e);
         }
         finally {
             session.close();
@@ -77,7 +91,7 @@ public class EnemyDAOImpl implements EnemyDAO {
             session.delete(Enemy.class, id);
         }
         catch (Exception e) {
-            // LOG
+            log.error("Error eliminando una entidad", e);
         }
         finally {
             session.close();
@@ -93,7 +107,7 @@ public class EnemyDAOImpl implements EnemyDAO {
             enemyList = session.findAll(Enemy.class);
         }
         catch (Exception e) {
-            // LOG
+            log.error("Error al obtener todas las entidades", e);
         }
         finally {
             session.close();
@@ -114,11 +128,33 @@ public class EnemyDAOImpl implements EnemyDAO {
             enemyList = session.findAll(Enemy.class, params);
         }
         catch (Exception e) {
-            // LOG
+            log.error("Error al obtener todos las entidades de un nivel", e);
         }
         finally {
             session.close();
         }
         return enemyList;
+    }
+
+    @Override
+    public void deleteEnemyUser(int idUser, int id) {
+
+    }
+
+    @Override
+    public int findMax() {
+        SessionManager session = null;
+        int idMax = 0;
+        try {
+            session = FactorySessionManager.openSession();
+            idMax = session.findMax(Enemy.class);
+        }
+        catch (Exception e) {
+            log.error("Error al encontrar el número máximo de entidades", e);
+        }
+        finally {
+            session.close();
+        }
+        return idMax;
     }
 }

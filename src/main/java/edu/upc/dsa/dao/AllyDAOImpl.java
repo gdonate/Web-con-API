@@ -2,13 +2,25 @@ package edu.upc.dsa.dao;
 
 import edu.upc.dsa.FactorySessionManager;
 import edu.upc.dsa.SessionManager;
-import edu.upc.dsa.models.Ally;
-import edu.upc.dsa.models.Enemy;
+import edu.upc.dsa.models.*;
+import org.apache.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.List;
 
 public class AllyDAOImpl implements AllyDAO {
+
+    //log4j info
+    final static Logger log = Logger.getLogger(AllyDAOImpl.class);
+    private static AllyDAO instance;
+    //constructor privado
+    private AllyDAOImpl(){}
+    //Singleton
+    public static AllyDAO getInstance() {
+        if (instance==null) instance = new AllyDAOImpl();
+        return instance;
+    }
+
     @Override
     public int addAlly(String name, String type, int life, int map, int positionX, int positionY, int user_id) {
         SessionManager session = null;
@@ -19,7 +31,7 @@ public class AllyDAOImpl implements AllyDAO {
             session.save(ally);
         }
         catch (Exception e) {
-            // LOG
+            log.error("Error añadiendo una entidad", e);
         }
         finally {
             session.close();
@@ -36,7 +48,7 @@ public class AllyDAOImpl implements AllyDAO {
             ally = (Ally)session.get(Ally.class, id);
         }
         catch (Exception e) {
-            // LOG
+            log.error("Error al obtener una entidad", e);
         }
         finally {
             session.close();
@@ -61,7 +73,7 @@ public class AllyDAOImpl implements AllyDAO {
             session.update(Ally.class, id);
         }
         catch (Exception e) {
-            // LOG
+            log.error("Error al modificar una entidad", e);
         }
         finally {
             session.close();
@@ -77,7 +89,7 @@ public class AllyDAOImpl implements AllyDAO {
             session.delete(Ally.class, id);
         }
         catch (Exception e) {
-            // LOG
+            log.error("Error eliminando una entidad", e);
         }
         finally {
             session.close();
@@ -93,7 +105,7 @@ public class AllyDAOImpl implements AllyDAO {
             allyList = session.findAll(Ally.class);
         }
         catch (Exception e) {
-            // LOG
+            log.error("Error al obtener todas las entidades", e);
         }
         finally {
             session.close();
@@ -114,11 +126,28 @@ public class AllyDAOImpl implements AllyDAO {
             allyList = session.findAll(Ally.class, params);
         }
         catch (Exception e) {
-            // LOG
+            log.error("Error al obtener todos las entidades de un nivel", e);
         }
         finally {
             session.close();
         }
         return allyList;
+    }
+
+    @Override
+    public int findMax() {
+        SessionManager session = null;
+        int idMax = 0;
+        try {
+            session = FactorySessionManager.openSession();
+            idMax = session.findMax(Ally.class);
+        }
+        catch (Exception e) {
+            log.error("Error al encontrar el número máximo de entidades", e);
+        }
+        finally {
+            session.close();
+        }
+        return idMax;
     }
 }
