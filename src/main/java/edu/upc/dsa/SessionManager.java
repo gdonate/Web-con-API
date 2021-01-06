@@ -13,7 +13,8 @@ public interface SessionManager<E> {
     public void save(Object entity);
     public void close();
     Object get(Class theClass, int ID);
-    public void update(Object object, int ID);
+    //veremos como gestionamos este update para otras clases debido al booleano
+    public void update(Object object, int ID, boolean status);
     public void delete(Object object, int ID);
     List<Object> findAll(Class theClass);
     //customList
@@ -22,8 +23,9 @@ public interface SessionManager<E> {
     List<Object> query(String query, Class theClass, HashMap params); //alternativa, de momento sin utilidad
     //función devuelve máximo de cualquier tabla
     public int findMax(Class theClass);
+    Object get(Class theClass, String firstParam);
 
-    //obtener id de cualquier clase dando su username y password
+    //obtener id de cualquier clase dando su username y password (User.class)
     public int getId(Class theClass, String username, String password) throws UserNotFoundException;
 
     //aquí vienen la declaración de tres funciones complementarias para SQL

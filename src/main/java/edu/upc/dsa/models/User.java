@@ -217,7 +217,6 @@ public class User {
         this.level = level;
     }
 
-
     //a continuación pondremos el tostring por si hace falta mostrarlo por consola
 
     @Override

@@ -41,7 +41,7 @@ public class SessionManagerImpl implements SessionManager{
             int i = 1;
 
             //el primer valor que tomará será el pstm.setObject(2, username) y así hasta completar la query
-            for (String field: ObjectHelper.getFields(entity)) {
+            for (String field: ObjectHelper.getFields(entity, false)) {
                 pstm.setObject(i++, ObjectHelper.getter(entity, field));
             }
             pstm.executeUpdate();
@@ -68,18 +68,26 @@ public class SessionManagerImpl implements SessionManager{
     }
 
     @Override
-    public void update(Object object, int ID) {
+    public void update(Object object, int ID, boolean status) {
         String updateQuery=QueryHelper.createQueryUPDATE(object);
         PreparedStatement pstm = null;
 
-        //todas estas consultas se basan en que cada entidad/objeto tiene su propio ID
         try {
             pstm = connection.prepareStatement(updateQuery);
             int i = 1;
 
-            //actualizamos todos los atributos de la entidad/objeto a través de un recorrido
-            for (String field: ObjectHelper.getFields(object)) {
-                pstm.setObject(i++, ObjectHelper.getter(object, field));
+            //lo único que cambiamos es un estado del objeto para decirle que está conectado o no conectado
+            //como vemos hemos modificado el update para pasarle el parametro booleano de la conexión
+            //buscaremos la manera de poder actualizar las estadísticas de otra entidad a través de otra función
+            if(status==false) {
+                for (String field : ObjectHelper.getFields(object, false)) {
+                    pstm.setObject(i++, ObjectHelper.getter(object, field));
+                }
+            }
+            else {
+                for (String field : ObjectHelper.getFields(object, true)) {
+                    pstm.setObject(i++, ObjectHelper.getter(object, field));
+                }
             }
 
             pstm.setObject(i, ID);
@@ -291,6 +299,55 @@ public class SessionManagerImpl implements SessionManager{
             e.printStackTrace();
         }
         return idMax;
+    }
+
+    @Override
+    public Object get(Class theClass, String firstParam) {
+        String selectQuery = QueryHelper.createQueryCustomSELECT(theClass);
+        Object entity = null;
+
+        //instanciamos nuevo constructor vacío y sin argumentos
+        try{
+            //creamos constructor nuevo para añadir valores después
+            //deprecated theClass.newInstance
+            entity = theClass.getDeclaredConstructor().newInstance();
+        }
+        catch (IllegalAccessException e){
+            e.printStackTrace();
+        } catch (InstantiationException e){
+            e.printStackTrace();
+        } catch (NoSuchMethodException e){
+            e.printStackTrace();
+        } catch (InvocationTargetException e){
+            e.printStackTrace();
+        }
+
+        ResultSet rs;
+        PreparedStatement pstm;
+
+        try{
+            pstm = connection.prepareStatement(selectQuery);
+            pstm.setObject(1, firstParam);
+            rs = pstm.executeQuery();
+
+            while(rs.next()){
+                //dentro de la lista fields guardaremos los atributos de la clase requerida. ej: username, mail, etc.
+                Field[] fields = theClass.getDeclaredFields();
+                rs.getString(1);
+                for(int i = 0; i<fields.length; i++){
+                    String fieldName = this.getFieldName(i+3, rs);
+                    ObjectHelper.setter(entity, fieldName, rs.getObject(i+3));
+                }
+
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        } catch (IllegalAccessException e){
+            e.printStackTrace();
+        } catch (InvocationTargetException e){
+            e.printStackTrace();
+        }
+        return entity;
     }
 
     //operación consulta para verificar un tipo de query

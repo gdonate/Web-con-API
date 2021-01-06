@@ -58,6 +58,7 @@ public class ItemDAOImpl implements ItemDAO {
         return item;
     }
 
+    //update de momento invalidado
     @Override
     public void updateItem(int id, String name, String type, int objectPoints, int price) {
         Item item = this.getItem(id);
@@ -69,7 +70,7 @@ public class ItemDAOImpl implements ItemDAO {
         SessionManager session = null;
         try {
             session = FactorySessionManager.openSession();
-            session.update(Item.class, id);
+            //session.update(Item.class, id);
         }
         catch (Exception e) {
             log.error("Error al modificar una entidad", e);

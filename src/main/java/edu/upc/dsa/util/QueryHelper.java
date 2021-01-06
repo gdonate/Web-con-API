@@ -26,7 +26,8 @@ public class QueryHelper {
 
         //si hay problemas quitamos la ruta edu.upc.dsa.util. del object helper
         //nos hace introspección recupera campos de la entidad en el objectHelper
-        String [] fields = ObjectHelper.getFields(entity);
+        //repasaremos el uso del booleano en el Object Helper
+        String [] fields = ObjectHelper.getFields(entity, false);
 
         //de momento supondremos que NO todas las clases deben tener id
         //sb.append("ID");
@@ -84,6 +85,14 @@ public class QueryHelper {
         return sb.toString();
     }
 
+    public static String createQueryCustomSELECT(Class theClass) {
+        StringBuffer sb = new StringBuffer();
+        sb.append("SELECT * FROM ").append(theClass.getSimpleName());
+        sb.append(" WHERE username = ?;");
+
+        return sb.toString();
+    }
+
     //aqui adjuntamos comanda delete para cualquier entidad
     public static String createQueryDELETE(Object entity) {
         StringBuffer sb = new StringBuffer();
@@ -111,28 +120,47 @@ public class QueryHelper {
     //nos faltaria adjuntar y crear la comanda update
     //lanzaremos las excepciones en los dao
     public static String createQueryUPDATE(Object entity) {
+        //implementar el booleano / lo inicializamos a false
+        boolean status = false;
 
         StringBuffer sb = new StringBuffer();
         //if(entity.getClass().getSuperclass().getSimpleName().equals("Object"))
+        if(entity.getClass().getSuperclass().getSimpleName().equals("Object")) {
 
-        sb.append("UPDATE ").append(entity.getClass().getSimpleName()).append(" ").append("SET");
+            sb.append("UPDATE ").append(entity.getClass().getSimpleName()).append(" ").append("SET");
 
-        String [] fields = ObjectHelper.getFields(entity);
+            String[] fields = ObjectHelper.getFields(entity, status);
 
-        //de momento supondremos que en todas las clases NO es obligatorio el id
-        //sb.append(" ID");
-        for (String field: fields) {
-            sb.append(" ").append(field);
-            sb.append(" = ?,");
+            //de momento supondremos que en todas las clases NO es obligatorio el id
+            //sb.append(" ID");
+            for (String field : fields) {
+                sb.append(" ").append(field);
+                sb.append(" = ?,");
+            }
+            //ahora eliminamos la coma que queda en el último atributo e indicamos que id queremos
+            sb.delete(sb.length() - 1, sb.length());
+            sb.append(" WHERE ID = ?;");
+            //sb.append(";");
+
+            //y devolvemos la consulta al usuario
+            return sb.toString();
         }
-        //ahora eliminamos la coma que queda en el último atributo e indicamos que id queremos
-        sb.delete(sb.length()-1, sb.length());
-        sb.append(" WHERE ID = ?;");
-        //sb.append(";");
+        else{
+            status=true;
+            sb.append("UPDATE ").append(entity.getClass().getSuperclass().getSimpleName()).append(" ").append("SET");
 
-        //y devolvemos la consulta al usuario
-        return sb.toString();
+            String[] fields = ObjectHelper.getFields(entity, status);
 
+            for (String field : fields) {
+                sb.append(" ").append(field);
+                sb.append(" = ?,");
+            }
+
+            sb.delete(sb.length() - 1, sb.length());
+            sb.append(" WHERE ID = ?;");
+
+            return sb.toString();
+        }
     }
 
     /* nos faltan 2 consultas:

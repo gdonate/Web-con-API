@@ -9,6 +9,7 @@ public interface AllyDAO {
     //CRUD Ally
     public int addAlly(String name, String type, int life, int map, int positionX, int positionY, int user_id);
     public Ally getAlly(int id);
+    //update de momento invalidado
     public void updateAlly(int id, String name, String type, int life, int map, int positionX, int positionY, int user_id);
     public void deleteAlly(int id);
     public List<Ally> getAllies();

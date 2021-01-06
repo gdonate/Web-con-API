@@ -8,23 +8,38 @@ import java.lang.reflect.*;
 public class ObjectHelper {
     //operación getFields la utiliza el QueryHelper
     //
-    public static String[] getFields(Object entity) {
+    public static String[] getFields(Object entity, boolean status) {
 
         Class theClass = entity.getClass();
 
-        //hacemos introspección sobre la clase/objeto/entity
-        //descubir atributos clase
-        Field[] fields = theClass.getDeclaredFields();
+        //en principio siempre trabajaremos con false
+        //ya que en el programa no tenemos ninguna clase heredada
+        //si da algún problema posiblemente lo quitemos
+        if(status==false) {
 
-        String[] sFields = new String[fields.length];
-        int i=0;
+            //hacemos introspección sobre la clase/objeto/entity
+            //descubir atributos clase
+            Field[] fields = theClass.getDeclaredFields();
 
-        //recorrido para ver todos los atributos
-        for (Field f: fields) sFields[i++]=f.getName();
+            String[] sFields = new String[fields.length];
+            int i = 0;
 
-        //nos devuelve los atributos de cada clase
-        return sFields;
+            //recorrido para ver todos los atributos
+            for (Field f : fields) sFields[i++] = f.getName();
 
+            //nos devuelve los atributos de cada clase
+            return sFields;
+        }
+        else{
+            Field[] fields = theClass.getSuperclass().getDeclaredFields();
+
+            String[] sFields = new String[fields.length];
+            int i = 0;
+
+            for (Field f : fields) sFields[i++] = f.getName();
+
+            return sFields;
+        }
     }
 
     //abrimos instancia y establecemos con objeto y property y metodo la acción dentro de la clase

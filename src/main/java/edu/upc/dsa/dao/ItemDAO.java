@@ -9,6 +9,7 @@ public interface ItemDAO {
     //CRUD Item
     public int addItem(String name, String type, int objectPoints, int price);
     public Item getItem(int id);
+    //update de momento invalidado
     public void updateItem(int id, String name, String type, int objectPoints, int price);
     public void deleteItem(int id);
     public List<Item> getItems();

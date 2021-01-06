@@ -56,6 +56,7 @@ public class AllyDAOImpl implements AllyDAO {
         return ally;
     }
 
+    //update de momento invalidado
     @Override
     public void updateAlly(int id, String name, String type, int life, int map, int positionX, int positionY, int user_id) {
         Ally ally = this.getAlly(id);
@@ -70,7 +71,7 @@ public class AllyDAOImpl implements AllyDAO {
         SessionManager session = null;
         try {
             session = FactorySessionManager.openSession();
-            session.update(Ally.class, id);
+            //session.update(Ally.class, id);
         }
         catch (Exception e) {
             log.error("Error al modificar una entidad", e);

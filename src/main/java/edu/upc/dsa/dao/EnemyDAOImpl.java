@@ -58,6 +58,7 @@ public class EnemyDAOImpl implements EnemyDAO {
         return enemy;
     }
 
+    //update de momento invalidado
     @Override
     public void updateEnemy(int id, String name, String type, int life, int map, int positionX, int positionY, int user_id) {
         Enemy enemy = this.getEnemy(id);
@@ -72,7 +73,7 @@ public class EnemyDAOImpl implements EnemyDAO {
         SessionManager session = null;
         try {
             session = FactorySessionManager.openSession();
-            session.update(Enemy.class, id);
+            //session.update(Enemy.class, id);
         }
         catch (Exception e) {
             log.error("Error al modificar una entidad", e);
