@@ -9,6 +9,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -120,6 +121,7 @@ public class SessionManagerImpl implements SessionManager{
 
     //objetivo función: devuelve el campo de la entidad del objeto que deseemos de la tabla, ej: id, username, etc.
     //al ser privada la función no necesita de implementación en la interfaz
+    //POSIBLEMENTE NO LA VOLVAMOS A UTILIZAR
     private String getFieldName(int i, ResultSet rs) throws SQLException {
         ResultSetMetaData rsmd = rs.getMetaData();
         String name = rsmd.getColumnName(i);
@@ -183,20 +185,45 @@ public class SessionManagerImpl implements SessionManager{
         PreparedStatement pstm;
 
         try{
+            logger.info("connexió: "+connection);
+            logger.info("connexió: "+selectQuery);
             pstm = connection.prepareStatement(selectQuery);
             pstm.setObject(1, ID);
             rs = pstm.executeQuery();
 
+            logger.info("Abans next id: "+ID);
             while(rs.next()){
+                logger.info("Després next id: ");
                 //dentro de la lista fields guardaremos los atributos de la clase requerida. ej: username, mail, etc.
                 Field[] fields = theClass.getDeclaredFields();
                 rs.getString(1);
-                for(int i = 0; i<fields.length; i++){
+                logger.info("fields: "+ Arrays.toString(fields));
+                int numColumns = rs.getMetaData().getColumnCount();
+                /*for(int i = 0; i<fields.length; i++){
                     String fieldName = this.getFieldName(i+2, rs);
                     ObjectHelper.setter(entity, fieldName, rs.getObject(i+2));
+                    logger.info("field name"+fieldName);
+                    logger.info("i "+i);
+                    logger.info(""+numColumns);
+                    logger.info("rs"+rs.getObject(i+2));
+                }*/
+
+                //en principio la estructura en si no ha variado
+                for (int i=2; i<numColumns; i++) {
+                    //no obstante este primer campo lo haciamos igual
+                    String fieldName = rs.getMetaData().getColumnName(i);
+                    Object value = rs.getObject(i);
+                    logger.info("i: "+i);
+                    logger.info("fieldName: "+fieldName);
+                    logger.info("value: "+value);
+
+                    if (value!=null){
+                        ObjectHelper.setter(entity, fieldName, value);
+                    }
                 }
 
             }
+            logger.info("entity: "+entity);
         } catch (SQLException e){
             e.printStackTrace();
         } catch (IllegalAccessException e){
@@ -206,6 +233,7 @@ public class SessionManagerImpl implements SessionManager{
         }
         return entity;
     }
+
 
     @Override
     public List<Object> findAll(Class theClass, HashMap params) {

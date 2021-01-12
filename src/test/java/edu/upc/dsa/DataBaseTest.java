@@ -55,17 +55,12 @@ public class DataBaseTest {
 
     @Test
     public void testLogOut() throws UserNotFoundException{
-        try {
             //Ahora queremos que dani salga del sistema
             log.info("Nos desconectamos del sistema");
             this.gtestdb.getUserDAO().logOut(1);
             User user = this.gtestdb.getUserDAO().getUser(1);
             //si dani se ha desconectado del sistema nos cambiará el estado de su conexión = false
             Assert.assertEquals(false, user.isConnected());
-        }
-        catch(NullPointerException e){
-            log.info("NullPointerException caught");
-        }
     }
 
     //debido a esto tampoco funciona correctamente el deleteUser
@@ -85,9 +80,9 @@ public class DataBaseTest {
     @Test
     public void testGetUser() throws UserNotFoundException {
         try {
-            User user = this.gtestdb.getUserDAO().getUser(14);
+            User user = this.gtestdb.getUserDAO().getUser(17);
             //arreglar el getUsername
-            Assert.assertEquals("raul32", user.getUsername());
+            Assert.assertEquals("kevin2", user.getUsername());
         }
         catch (NullPointerException e){
             log.info("NullPointerException caught");
