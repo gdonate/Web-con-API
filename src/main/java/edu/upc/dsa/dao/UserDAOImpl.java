@@ -157,7 +157,7 @@ public class UserDAOImpl implements UserDAO {
         SessionManager session = null;
         try {
             session = FactorySessionManager.openSession();
-            session.update(User.class, id, connected);
+            session.update(user, id, connected);
         }
         catch (Exception e) {
             log.error("Error al modificar una entidad", e);
@@ -297,6 +297,7 @@ public class UserDAOImpl implements UserDAO {
         int idMax = 0;
         try {
             session = FactorySessionManager.openSession();
+            //revisar esta función
             idMax = session.findMax(User.class);
         }
         catch (Exception e) {

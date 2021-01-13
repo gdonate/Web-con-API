@@ -82,12 +82,14 @@ public class SessionManagerImpl implements SessionManager{
             //buscaremos la manera de poder actualizar las estadísticas de otra entidad a través de otra función
             if(status==false) {
                 for (String field : ObjectHelper.getFields(object, false)) {
+                    if(!field.toUpperCase().equals("ID"))
                     pstm.setObject(i++, ObjectHelper.getter(object, field));
                 }
             }
             else {
                 for (String field : ObjectHelper.getFields(object, true)) {
-                    pstm.setObject(i++, ObjectHelper.getter(object, field));
+                    if(!field.toUpperCase().equals("ID"))
+                        pstm.setObject(i++, ObjectHelper.getter(object, field));
                 }
             }
 
@@ -199,14 +201,6 @@ public class SessionManagerImpl implements SessionManager{
                 rs.getString(1);
                 logger.info("fields: "+ Arrays.toString(fields));
                 int numColumns = rs.getMetaData().getColumnCount();
-                /*for(int i = 0; i<fields.length; i++){
-                    String fieldName = this.getFieldName(i+2, rs);
-                    ObjectHelper.setter(entity, fieldName, rs.getObject(i+2));
-                    logger.info("field name"+fieldName);
-                    logger.info("i "+i);
-                    logger.info(""+numColumns);
-                    logger.info("rs"+rs.getObject(i+2));
-                }*/
 
                 //en principio la estructura en si no ha variado
                 for (int i=2; i<numColumns; i++) {
@@ -307,7 +301,7 @@ public class SessionManagerImpl implements SessionManager{
 
     @Override
     public int findMax(Class theClass) {
-        String selectMaxQuery = QueryHelper.findMaxQuery(theClass);
+        String selectMaxQuery = QueryHelper.findEntityCount(theClass);
         //inicializamos integer del id debido a error que luego daremos valor real
         int idMax = 0;
 
@@ -358,7 +352,7 @@ public class SessionManagerImpl implements SessionManager{
             pstm.setObject(1, firstParam);
             rs = pstm.executeQuery();
 
-            while(rs.next()){
+            if(rs.next()){
                 //dentro de la lista fields guardaremos los atributos de la clase requerida. ej: username, mail, etc.
                 Field[] fields = theClass.getDeclaredFields();
                 rs.getString(1);
@@ -368,6 +362,8 @@ public class SessionManagerImpl implements SessionManager{
                 }
 
             }
+            else
+                entity=null;
         } catch (SQLException e){
             e.printStackTrace();
         } catch (IllegalAccessException e){

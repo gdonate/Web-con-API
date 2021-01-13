@@ -156,6 +156,9 @@ public class User {
     public boolean isConnected() {
         return connected;
     }
+    public boolean getConnected(){
+        return connected;
+    }
 
     public void setConnected(boolean connected) {
         this.connected = connected;

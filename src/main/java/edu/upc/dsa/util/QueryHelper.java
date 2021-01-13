@@ -134,8 +134,10 @@ public class QueryHelper {
             //de momento supondremos que en todas las clases NO es obligatorio el id
             //sb.append(" ID");
             for (String field : fields) {
-                sb.append(" ").append(field);
-                sb.append(" = ?,");
+                if(!field.toUpperCase().equals("ID")) {
+                    sb.append(" ").append(field);
+                    sb.append(" = ?,");
+                }
             }
             //ahora eliminamos la coma que queda en el último atributo e indicamos que id queremos
             sb.delete(sb.length() - 1, sb.length());
@@ -176,10 +178,19 @@ public class QueryHelper {
         return sb.toString();
     }
 
-    //devuelve el tamaño máximo de cualquier tabla de la base de datos
+    //no devuelve el número total de usuarios/items, devuelve el id máximo o precio máximo o lo que se quiera
+    //de una entidad!!!
     public static String findMaxQuery(Class theClass){
         StringBuffer sb = new StringBuffer();
         sb.append("SELECT MAX(ID) AS ID FROM ").append(theClass.getSimpleName()).append(";");
+
+        return sb.toString();
+    }
+
+    //diferencia respecto a la de arriba: cuenta el número total de items/usuarios o lo que sea que hay en la tabla
+    public static String findEntityCount(Class theClass){
+        StringBuffer sb = new StringBuffer();
+        sb.append("SELECT COUNT(*) FROM ").append(theClass.getSimpleName()).append(";");
 
         return sb.toString();
     }
