@@ -1,3 +1,7 @@
+DROP DATABASE IF EXISTS eetacwarsdb;
+CREATE DATABASE eetacwarsdb;
+USE eetacwarsdb;
+
 /*Cada bloque lo ejecutamos por separado en el HeidiSQL*/
 CREATE TABLE User (
 ID INTEGER NOT NULL AUTO_INCREMENT,
@@ -67,7 +71,6 @@ item_id INTEGER NOT NULL, foreign key(item_id) references Item(ID)
 );
 
 /*Añadir valores a la base de datos*/
-INSERT INTO User(ID, username) VALUES (0, 'ejemplooo');
 INSERT INTO User (username, mail, name, lastname, city,  password, connected) VALUES ('dani98', 'dani@upc.edu', 'Dani', 'Gonzalez', 'Paris', 'dani98', false);
 INSERT INTO User (username, mail, name, lastname, city,  password, connected) VALUES ('maria16', 'maria@upc.edu', 'Maria', 'Hernandez', 'Roma', 'maria16', false);
 INSERT INTO User (username, mail, name, lastname, city,  password, connected) VALUES ('pedro7', 'pedro@upc.edu', 'Pedro', 'Fernandez', 'Bruselas', 'pedro7', false);
