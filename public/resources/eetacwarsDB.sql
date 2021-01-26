@@ -1,3 +1,7 @@
+DROP DATABASE IF EXISTS eetacwarsdb;
+CREATE DATABASE eetacwarsdb;
+USE eetacwarsdb;
+
 /*Cada bloque lo ejecutamos por separado en el HeidiSQL*/
 CREATE TABLE User (
 ID INTEGER NOT NULL AUTO_INCREMENT,
