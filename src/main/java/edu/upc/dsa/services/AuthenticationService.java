@@ -38,7 +38,7 @@ public class AuthenticationService {
     @POST
     @ApiOperation(value = "cargar el perfil", notes = "escribir el nombre de usuario y la contraseña para loggearse")
     @ApiResponses(value = {
-            @ApiResponse(code= 201, message = "Succesful", response= User.class, responseContainer="User"),
+            @ApiResponse(code= 200, message = "Succesful", response= User.class, responseContainer="User"),
             @ApiResponse(code= 404, message = "User not found"),
             @ApiResponse(code= 401, message = "Password not match"),
             @ApiResponse(code=403, message="You are connected in other device")
