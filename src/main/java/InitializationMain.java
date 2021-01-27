@@ -1,7 +1,6 @@
-import edu.upc.dsa.SessionManager;
+
 import edu.upc.dsa.cells.*;
 import edu.upc.dsa.cells.Character;
-import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,7 +9,7 @@ public class InitializationMain {
 
     public static void main(String[]args){
 
-        final Logger logger = Logger.getLogger(InitializationMain.class);
+        //final Logger logger = Logger.getLogger(InitializationMain.class);
 
         //Esto es una muestra para pasarlo después si tenemos tiempo a base de datos
 
@@ -109,7 +108,7 @@ public class InitializationMain {
             map.saveMap();
         } catch (IOException e) {
             e.printStackTrace();
-            logger.info("Aseguremos que no vienen de aquí los errores");
+            //logger.info("Aseguremos que no vienen de aquí los errores");
         }
 
         Map m = new Map();
@@ -120,7 +119,7 @@ public class InitializationMain {
             m.load();
         } catch (IOException e) {
             e.printStackTrace();
-            logger.info("Y de aquí tampoco vienen errores");
+            //logger.info("Y de aquí tampoco vienen errores");
         }
     }
 
