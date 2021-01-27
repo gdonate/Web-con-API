@@ -62,7 +62,7 @@ public class UserService {
 
     //register User = Sign Up
     @POST
-    @ApiOperation(value = "registrar un usuario", notes = "Enter username and password to register in the system")
+    @ApiOperation(value = "registrar un usuario", notes = "Create a new User")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successful", response=void.class, responseContainer = "Void class"),
             @ApiResponse(code = 402, message="Existant user")
@@ -72,12 +72,12 @@ public class UserService {
     public Response addUser(User user) {
         try {
             this.gservicedb.getUserDAO().addUser(user.getUsername(), user.getPassword(), user.getMail(), user.getName(), user.getLastname(), user.getCity());
-            return Response.status(201).entity(user).build();
         }
         catch (ExistantUserException e){
             e.printStackTrace();
             return Response.status(402).build();
         }
+        return Response.status(201).entity(user).build();
     }
 
     //este servicio lo utilizaremos para encontar un usuario según su id

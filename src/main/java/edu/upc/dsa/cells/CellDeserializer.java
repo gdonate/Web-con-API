@@ -22,9 +22,14 @@ public class CellDeserializer extends StdDeserializer<Cell> {
         super(vc);
     }
 
-    protected CellDeserializer(JavaType valueType) {
-        super(valueType);
+    //constructor vacío problemas con entidad Map
+    public CellDeserializer(){
+        this(null);
     }
+
+    /*protected CellDeserializer(JavaType valueType) {
+        super(valueType);
+    }*/
 
     //y creamos funcion deserializar esta servirá para cambiar formato JSON a objeto normal
     //no evaluamos casos diferentes porque todas las entidades las consideraremos como iguales

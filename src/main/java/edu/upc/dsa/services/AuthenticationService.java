@@ -36,12 +36,12 @@ public class AuthenticationService {
     }
 
     @POST
-    @ApiOperation(value = "cargar el perfil", notes = "escribir el nombre de usuario y la contraseña para loggearse")
+    @ApiOperation(value = "login", notes = "Iniciar sesión")
     @ApiResponses(value = {
             @ApiResponse(code= 200, message = "Succesful", response= User.class, responseContainer="User"),
             @ApiResponse(code= 404, message = "User not found"),
-            @ApiResponse(code= 401, message = "Password not match"),
-            @ApiResponse(code=403, message="You are connected in other device")
+            @ApiResponse(code= 409, message = "Password not match"),
+            @ApiResponse(code=500, message="Auth error")
     })
 
     //parece que el login nos da buenos resultados
@@ -51,25 +51,24 @@ public class AuthenticationService {
         try{
             user = this.gservicedb.getUserDAO().logIn(user.getUsername(), user.getPassword());
             System.out.println(user);
-            return Response.status(201).entity(user).build();
         } catch (UserNotFoundException e){
             e.printStackTrace();
             return Response.status(404).build();
         } catch(PasswordNotMatchException e){
             e.printStackTrace();
             return Response.status(401).build();
-        } catch(UserAlreadyConectedException e){
-            e.printStackTrace();
+        } catch(Exception e){
             return Response.status(403).build();
         }
+        return Response.status(200).entity(user).build();
     }
 
     //desconectar un usuario del sistema
     @PUT
     @ApiOperation(value = "log out", notes = "")
     @ApiResponses(value = {
-            @ApiResponse(code= 201, message = "Succesful"),
-            @ApiResponse(code= 404, message = "User not found")
+            @ApiResponse(code= 200, message = "Succesful"),
+            @ApiResponse(code= 500, message = "Error")
     })
 
     @Path("/logout")
@@ -77,11 +76,11 @@ public class AuthenticationService {
     public Response logOut(int idUser){
         try{
             this.gservicedb.getUserDAO().logOut(idUser);
-            return Response.status(201).entity(idUser).build();
         } catch (UserNotFoundException e){
             e.printStackTrace();
             return Response.status(404).build();
         }
+        return Response.status(200).entity(idUser).build();
     }
 
 }

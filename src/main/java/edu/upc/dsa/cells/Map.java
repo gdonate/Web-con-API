@@ -3,12 +3,18 @@ package edu.upc.dsa.cells;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.core.Version;
+import org.json.JSONObject;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 //aqui trataremos toda la info de Mapa
 public class Map {
@@ -60,7 +66,7 @@ public class Map {
     }
 
     public void saveMap() throws IOException {
-        File f = new File("./src/main/resources/Maps/");
+        File f = new File("src/main/resources/Maps/");
         //si fitxer primer no existeix crearem un de nou segons les nostres indicacions
         if (!f.exists()) {
             f.createNewFile();
@@ -70,12 +76,54 @@ public class Map {
         ObjectMapper om = new ObjectMapper();
         try {
             om.writerWithView(Views.Normal.class).writeValue(
-                    new File("./src/main/resources/Maps/" + this.name + ".txt"), this);
+                    new File("src/main/resources/Maps/" + this.name + ".txt"), this);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
     }
 
+    public void load() throws IOException{
+        ObjectMapper om = new ObjectMapper();
+        SimpleModule sm = new SimpleModule("CellDeserializer", new Version(1,0,0,null,null,null));
+        sm.addDeserializer(Cell.class, new CellDeserializer());
+        om.registerModule(sm);
+        Map m = om.readValue(new File("src/main/resources/Maps/"+this.name+".txt"), Map.class);
+        this.name = m.name;
+        this.cells = m.cells;
+        this.height = m.height;
+        this.width = m.width;
+    }
+
+    public static Map loadMap(String mapName){
+        Map m = new Map(mapName,0,0);
+        try {
+            m.load();
+        } catch (IOException e) {
+            return null;
+        }
+        return m;
+    }
+
+    //ver la lista de mapas
+    public static List<Map> loadMaps(){
+        List<Map> result = new ArrayList<>();
+        File f = new File("src/main/resources/Maps/");
+        if(f.listFiles() != null){
+            for (File file : f.listFiles()) {
+                String fileName = file.getName();
+                fileName = fileName.substring(0, fileName.lastIndexOf('.'));
+                result.add(Map.loadMap(fileName));
+            }
+        }
+        return result;
+    }
+
+    public void readMap() throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(getName() +".txt"));
+        JSONObject jo = new JSONObject(br.read());
+        this.setName(jo.getString("name"));
+        this.setWidth(jo.getInt("width"));
+    }
 
 
     //como siempre ponemos todos los getters y setters implementados por el IntelliJ

@@ -1,5 +1,5 @@
 //de momento lo ponemos como localhost después se cambiará a http://147.83.7.206:8080/dsaApp
-var BASE_URI="http://localhost:8080/dsaApp";
+var BASE_URI="http://147.83.7.206:8080/dsaApp";
 
 //ingreso este comentario para que me reconozca el login
 
@@ -25,12 +25,23 @@ $(document).ready(function(){
             console.log("Se ha iniciado sesión correctamente");
             console.log(data);
             console.log(url);
+            var username = data.username;
+            var name = data.name;
+            var points = data.points;
+            var enemiesKilled = data.enemiesKilled;
+            var level = data.level;
+            //nos llevamos los siguientes datos del usuario
+            window.sessionStorage.setItem("username", username);
+            window.sessionStorage.setItem("name", name);
+            window.sessionStorage.setItem("points", points);
+            window.sessionStorage.setItem("enemiesKilled", enemiesKilled);
+            window.sessionStorage.setItem("level", level);
             alert('¡Te autentificaste correctamente');
             //window.localStorage.setItem("username",username);
             //window.localStorage.setItem("password",password);
             //con esta última indicación redirigimos al usuario a la nueva pagina
             //con _self lo hacemos en la misma ventana, con _blank le llevaríamos a otra en blanco
-            var url = "http://localhost:8080/html/myprofile.html"; //localhost
+            var url = "http://147.83.7.206:8080/html/myprofile.html"; //localhost
             window.open(url, "_self");
         },
         error: function(error){
