@@ -25,14 +25,14 @@ public class AuthenticationService {
 
     public AuthenticationService() throws Exception{
         this.gservicedb = DAOManagerImpl.getInstance();
-        if (gservicedb.getUserDAO().findMax() == 0) {
+        /*if (gservicedb.getUserDAO().findMax() == 0) {
             this.gservicedb.getUserDAO().addUser("tatiana1", "tatiana@hotmail.es","Tatiana", "Tkachuk", "Barcelona", "hola");
             this.gservicedb.getUserDAO().addUser("gabriel2", "gabriel@hotmail.es","Gabriel", "Donate", "Castelldefels", "buenas");
             this.gservicedb.getUserDAO().addUser("kevin3", "kevin@hotmail.es","Kevin", "Alcalde", "Barcelona", "bye");
             this.gservicedb.getUserDAO().addUser("oscar4", "oscar@hotmail.es","Oscar", "Vilamitjana", "Gavà", "hello");
             this.gservicedb.getUserDAO().addUser("miquel5", "miquel@hotmail.es","Miquel", "Arina", "Castelldefels", "adios");
 
-        }
+        }*/
     }
 
     @POST

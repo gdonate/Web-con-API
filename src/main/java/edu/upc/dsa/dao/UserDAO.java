@@ -8,10 +8,10 @@ public interface UserDAO {
 
     //CRUD User / Retocaremos todas estas funciones continuamente ya que hay algunas que posiblemente estén en desuso
     //hemos lanzado excepciones en varias funciones para ver si se arregla error en el getUser
-    public User logIn(String username, String password) throws UserNotFoundException, PasswordNotMatchException, UserAlreadyConectedException;
+    public User logIn(String username, String password) throws Exception;
     public void logOut(int id) throws UserNotFoundException;
     //addUser = signUp
-    public void addUser(String username, String mail, String name, String lastname, String city, String password) throws ExistantUserException;
+    public void addUser(String username, String mail, String name, String lastname, String city, String password) throws Exception;
     public User getUser(int id) throws UserNotFoundException;
     public User getUser(String username) throws UserNotFoundException;
     public void updateUser(int id, String username, String mail, String name, String lastname, String city, String password, boolean connected) throws UserNotFoundException;

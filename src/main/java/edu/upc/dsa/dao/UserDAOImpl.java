@@ -79,11 +79,11 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void addUser(String username, String mail, String name, String lastname, String city, String password) {
+    public void addUser(String username, String mail, String name, String lastname, String city, String password) throws Exception {
         User user = this.getUser(username);
         SessionManager session = null;
         //posible lista para los items del usuario
-        List<Item> items;
+        //List<Item> items;
         try {
             if (user == null) {
                 session = FactorySessionManager.openSession();
@@ -98,6 +98,7 @@ public class UserDAOImpl implements UserDAO {
         }
         catch (Exception e) {
             log.error("Error añadiendo una entidad", e);
+            throw e;
         }
         finally {
             session.close();
